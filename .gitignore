@@ -1,0 +1,15 @@
+*.csproj
+*.csproj
+*.csproj
+*.csproj
+*.csproj
+*.meta
+*.meta
+/[Ll]Library/ArtifactDB/
+/[Ll]ibrary/
+.vs/DigitalTwin_Unity/v16/.suo
+Assembly-CSharp.csproj
+
+Library/ArtifactDB
+Library/ArtifactDB
+Library/ArtifactDB
