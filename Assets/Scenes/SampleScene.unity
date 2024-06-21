@@ -6128,7 +6128,7 @@ GameObject:
   - component: {fileID: 192094341}
   - component: {fileID: 192094340}
   m_Layer: 0
-  m_Name: DigitalTwin_AQlanLabTableRemaster_XAxis1 (1)
+  m_Name: DigitalTwin_AQlanLabTableRemaster_XAxis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22886,7 +22886,7 @@ Transform:
   - {fileID: 1245803809}
   - {fileID: 151446835}
   m_Father: {fileID: 1011883064}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &760250807
 GameObject:
@@ -30950,6 +30950,49 @@ Transform:
   m_Father: {fileID: 1662853401}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &995574499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 995574500}
+  - component: {fileID: 995574501}
+  m_Layer: 0
+  m_Name: UnityMainThreadDispatcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &995574500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995574499}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1011883064}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &995574501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995574499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c727b4a4228aaff44a47488f7d492b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &997717173
 GameObject:
   m_ObjectHideFlags: 0
@@ -31483,6 +31526,7 @@ Transform:
   m_LocalScale: {x: 27.975742, y: 21.585556, z: 11.348731}
   m_Children:
   - {fileID: 1055570993}
+  - {fileID: 995574500}
   - {fileID: 1938850630}
   - {fileID: 756597497}
   - {fileID: 2142991492}
@@ -32479,10 +32523,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf57c3d86d96b14aa521bb2f36dd07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  display: {fileID: 1120483550}
-  startStopText: {fileID: 884359946}
-  apiKey: 151B3189E551406F9C93A218FD50FD0E
-  webcamURL: http://192.168.1.101/webcam/?action=stream
+  rawImage: {fileID: 1120483550}
+  startButton: {fileID: 1692979353}
+  streamUrl: http://192.168.1.101/webcam/?action=stream
 --- !u!4 &1055570993
 Transform:
   m_ObjectHideFlags: 0
@@ -63081,7 +63124,7 @@ Transform:
   m_LocalScale: {x: 0.9341381, y: -0.0013347461, z: 0.64049435}
   m_Children: []
   m_Father: {fileID: 1011883064}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1938850631
 BoxCollider:
@@ -67409,7 +67452,7 @@ Transform:
   - {fileID: 422772587}
   - {fileID: 1872219410}
   m_Father: {fileID: 1011883064}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 20.751001, z: 0}
 --- !u!1 &2144004102
 GameObject:
@@ -74201,8 +74244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a0451b8517f3244bc7f377c1f1e46c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh1: {fileID: 1512098965}
-  textMesh2: {fileID: 1332352761}
+  Status_text_for_Brown_Printer: {fileID: 1512098965}
+  Status_text_for_Yellow_Printer: {fileID: 1332352761}
   octoPrintJobDisplay: {fileID: 8839164219962519534}
 --- !u!114 &8839164219962519534
 MonoBehaviour:
@@ -74248,8 +74291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e9ff8353275ee458093a9cb1ff0357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh1: {fileID: 1465622415}
-  Temp1: {fileID: 8839164219962519535}
+  Tempreture_text: {fileID: 1465622415}
+  LCD_Brown_Object: {fileID: 8839164219962519535}
 --- !u!23 &8839164220027212432
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -75030,8 +75073,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a0451b8517f3244bc7f377c1f1e46c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh1: {fileID: 1512098965}
-  textMesh2: {fileID: 1332352761}
+  Status_text_for_Brown_Printer: {fileID: 1512098965}
+  Status_text_for_Yellow_Printer: {fileID: 1332352761}
   octoPrintJobDisplay: {fileID: 8839164220550892153}
 --- !u!114 &8839164220550892153
 MonoBehaviour:

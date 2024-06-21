@@ -2,23 +2,23 @@
 
 public class LCD_Brown : MonoBehaviour
 {
-    public TextMesh textMesh1;
+    public TextMesh Tempreture_text;
 
-    public OctoPrint_Brown Temp1;
+    public OctoPrint_Brown LCD_Brown_Object;
 
     private void Update()
     {
-        if (Temp1 != null)
+        if (LCD_Brown_Object != null)
         {
-            float bedTemp = Temp1.BedActualTemperature;
-            float toolTemp = Temp1.ToolActualTemperature;
+            float bedTemp = LCD_Brown_Object.BedActualTemperature;
+            float toolTemp = LCD_Brown_Object.ToolActualTemperature;
 
 
-            textMesh1.text = "Bed: " + bedTemp.ToString("F2") + "\n" + "Head: " + toolTemp.ToString("F2");
+            Tempreture_text.text = "Bed: " + bedTemp.ToString("F2") + "\n" + "Head: " + toolTemp.ToString("F2");
         }
         else
         {
-            textMesh1.text = "Bed: N/A\nHead: N/A";
+            Tempreture_text.text = "Bed: N/A\nHead: N/A";
         }
     }
 }
