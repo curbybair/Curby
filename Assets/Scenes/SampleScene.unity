@@ -16318,6 +16318,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 517731671}
   m_Mesh: {fileID: 3167365237810132310, guid: d8501252504affc4d86aca05e650caa9, type: 3}
+--- !u!1 &519118753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 519118754}
+  - component: {fileID: 519118755}
+  m_Layer: 0
+  m_Name: Web Camera Controller Yellow Printer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &519118754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519118753}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1567348937}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519118755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519118753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ea1c9e17f8a0e409c54eacbda28055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Display_Image: {fileID: 1574341025}
+  startButton: {fileID: 1692979353}
+  streamUrl: http://192.168.1.102/webcam/?action=stream
 --- !u!1 &521620519
 GameObject:
   m_ObjectHideFlags: 0
@@ -22886,7 +22932,7 @@ Transform:
   - {fileID: 1245803809}
   - {fileID: 151446835}
   m_Father: {fileID: 1011883064}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &760250807
 GameObject:
@@ -30974,12 +31020,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995574499}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1011883064}
-  m_RootOrder: 1
+  m_Father: {fileID: 1567348937}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &995574501
 MonoBehaviour:
@@ -31525,8 +31571,7 @@ Transform:
   m_LocalPosition: {x: -18.887068, y: 10.702702, z: 150.58891}
   m_LocalScale: {x: 27.975742, y: 21.585556, z: 11.348731}
   m_Children:
-  - {fileID: 1055570993}
-  - {fileID: 995574500}
+  - {fileID: 1567348937}
   - {fileID: 1938850630}
   - {fileID: 756597497}
   - {fileID: 2142991492}
@@ -32505,7 +32550,7 @@ GameObject:
   - component: {fileID: 1055570993}
   - component: {fileID: 1055570992}
   m_Layer: 0
-  m_Name: Live Camera Controller
+  m_Name: Web Camera Controller Brown Printer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32520,10 +32565,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1055570991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccf57c3d86d96b14aa521bb2f36dd07f, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d94b0abc061e74c91668fc26b1d22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawImage: {fileID: 1120483550}
+  Display_Image: {fileID: 1726287711}
   startButton: {fileID: 1692979353}
   streamUrl: http://192.168.1.101/webcam/?action=stream
 --- !u!4 &1055570993
@@ -32534,10 +32579,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055570991}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 1.6845089, y: 1.2965963, z: -0.2755506}
+  m_LocalPosition: {x: 1.6845087, y: 1.2965962, z: -0.27554908}
   m_LocalScale: {x: 2.3815014, y: 1.2520884, z: 0.96608764}
   m_Children: []
-  m_Father: {fileID: 1011883064}
+  m_Father: {fileID: 1567348937}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1060969181
@@ -50984,6 +51029,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566643501}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1567348936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1567348937}
+  m_Layer: 0
+  m_Name: Web camera Functions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1567348937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567348936}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1055570993}
+  - {fileID: 519118754}
+  - {fileID: 995574500}
+  m_Father: {fileID: 1011883064}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1569111998
 GameObject:
   m_ObjectHideFlags: 0
@@ -63124,7 +63202,7 @@ Transform:
   m_LocalScale: {x: 0.9341381, y: -0.0013347461, z: 0.64049435}
   m_Children: []
   m_Father: {fileID: 1011883064}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1938850631
 BoxCollider:
@@ -67452,7 +67530,7 @@ Transform:
   - {fileID: 422772587}
   - {fileID: 1872219410}
   m_Father: {fileID: 1011883064}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 20.751001, z: 0}
 --- !u!1 &2144004102
 GameObject:

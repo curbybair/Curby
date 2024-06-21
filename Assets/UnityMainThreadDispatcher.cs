@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnityMainThreadDispatcher : MonoBehaviour
+public class UnityMainThreadDispatcher : MonoBehaviour     //Fetching the MJPEG stream is done asynchronously to avoid blocking the main thread. This operation runs on a background thread to keep the UI responsive.
+
 {
     private static readonly Queue<Action> _executionQueue = new Queue<Action>();
 
@@ -18,7 +19,7 @@ public class UnityMainThreadDispatcher : MonoBehaviour
         }
     }
 
-    public void Enqueue(IEnumerator action)
+    public void Enqueue(IEnumerator action) //Enqueues a coroutine to be executed on the main thread.
     {
         lock (_executionQueue)
         {
@@ -26,7 +27,8 @@ public class UnityMainThreadDispatcher : MonoBehaviour
         }
     }
 
-    public void Enqueue(Action action)
+    public void Enqueue(Action action)  //Enqueues an action to be executed on the main thread.
+
     {
         Enqueue(ActionWrapper(action));
     }
