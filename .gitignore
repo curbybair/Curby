@@ -13,3 +13,4 @@ Assembly-CSharp.csproj
 Library/ArtifactDB
 Library/ArtifactDB
 Library/ArtifactDB
+Temp/*
