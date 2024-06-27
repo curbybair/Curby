@@ -53264,6 +53264,7 @@ GameObject:
   - component: {fileID: 1600320468}
   - component: {fileID: 1600320467}
   - component: {fileID: 1600320471}
+  - component: {fileID: 1600320472}
   m_Layer: 0
   m_Name: Scripts for Readings
   m_TagString: Untagged
@@ -53378,7 +53379,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600320465}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb20d8d8d4db2004998279cb8a8a9c7d, type: 3}
   m_Name: 
@@ -53391,6 +53392,27 @@ MonoBehaviour:
   yellowPressureTextUI: {fileID: 885815770}
   yellowHumidityTextUI: {fileID: 710191028}
   yellowAirQualityTextUI: {fileID: 1696809440}
+--- !u!114 &1600320472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600320465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a8adc147621e574789748b7b2770b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temperatureTextUI: {fileID: 1125753288}
+  pressureTextUI: {fileID: 1593780668}
+  humidityTextUI: {fileID: 152743639}
+  airQualityTextUI: {fileID: 1980283346}
+  yellowTemperatureTextUI: {fileID: 1249663154}
+  yellowPressureTextUI: {fileID: 885815770}
+  yellowHumidityTextUI: {fileID: 710191028}
+  yellowAirQualityTextUI: {fileID: 1696809440}
+  xPositionObject: {fileID: 192094336}
 --- !u!1 &1610961941
 GameObject:
   m_ObjectHideFlags: 0
@@ -77238,6 +77260,7 @@ GameObject:
   - component: {fileID: 8839164220926514999}
   - component: {fileID: 8839164220926515017}
   - component: {fileID: 8839164220926515016}
+  - component: {fileID: 8839164220926515000}
   m_Layer: 0
   m_Name: Brown_DigitalTwin_AQlanLabTableRemaster_Frame
   m_TagString: Untagged
@@ -77267,6 +77290,19 @@ Transform:
   m_Father: {fileID: 4669163915473828908}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &8839164220926515000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8839164220926514998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56c397b2d1a37247adfd468791d5b01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xPositionObject: {fileID: 8839164220496199667}
 --- !u!23 &8839164220926515016
 MeshRenderer:
   m_ObjectHideFlags: 0
