@@ -18,6 +18,12 @@ public class ZMQSubscriber : MonoBehaviour
     public TextMeshProUGUI humidityTextUI;
     public TextMeshProUGUI airQualityTextUI;
 
+    // Additional TextMeshProUGUI for second topic
+    public TextMeshProUGUI yellowTemperatureTextUI;
+    public TextMeshProUGUI yellowPressureTextUI;
+    public TextMeshProUGUI yellowHumidityTextUI;
+    public TextMeshProUGUI yellowAirQualityTextUI;
+
     void Start()
     {
         Debug.Log("Starting ZMQSubscriber...");
@@ -41,11 +47,13 @@ public class ZMQSubscriber : MonoBehaviour
             string raspberryPiIp = "tcp://192.168.1.111:5555";  // Replace with your server address
             subscriberSocket.Connect(raspberryPiIp);
 
-            // Subscribe to the topic
-            string topic = "Port0_Brown_Temp";
-            subscriberSocket.Subscribe(topic);
+            // Subscribe to the topics
+            string topic1 = "Port0_Brown_Temp";
+            string topic2 = "Port3_yellow_Temp";
+            subscriberSocket.Subscribe(topic1);
+            subscriberSocket.Subscribe(topic2);
 
-            Debug.Log("Connected to ZMQ server and subscribed to topic: " + topic);
+            Debug.Log("Connected to ZMQ server and subscribed to topics: " + topic1 + " and " + topic2);
 
             // Start listening for messages
             running = true;
@@ -84,6 +92,23 @@ public class ZMQSubscriber : MonoBehaviour
 
     void ProcessMessage(string message)
     {
+        // Check the topic from the message and process accordingly
+        if (message.StartsWith("Port0_Brown_Temp"))
+        {
+            ProcessPort0Message(message);
+        }
+        else if (message.StartsWith("Port3_yellow_Temp"))
+        {
+            ProcessPort2Message(message);
+        }
+        else
+        {
+            Debug.LogWarning("Received message with unknown topic.");
+        }
+    }
+
+    void ProcessPort0Message(string message)
+    {
         // Split the message to get the data part
         string[] parts = message.Split('%');
         if (parts.Length > 1)
@@ -117,10 +142,62 @@ public class ZMQSubscriber : MonoBehaviour
                 // Update UI elements on the main thread
                 UnityMainThreadDispatcher.Instance().Enqueue(() =>
                 {
-                    if (temperatureTextUI != null) temperatureTextUI.text = $"Temperature: {temperature}";
-                    if (pressureTextUI != null) pressureTextUI.text = $"Pressure: {pressure}";
-                    if (humidityTextUI != null) humidityTextUI.text = $"Humidity: {humidity}";
-                    if (airQualityTextUI != null) airQualityTextUI.text = $"Air Quality: {airQuality}";
+                    if (temperatureTextUI != null) temperatureTextUI.text = $"Temperature (°C): {temperature}";
+                    if (pressureTextUI != null) pressureTextUI.text = $"Pressure (InchHg): {pressure}";
+                    if (humidityTextUI != null) humidityTextUI.text = $"Humidity (g/kg): {humidity}";
+                    if (airQualityTextUI != null) airQualityTextUI.text = $"Air Quality (kΩ): {airQuality}";
+                });
+            }
+            else
+            {
+                Debug.LogWarning("Received data does not contain enough elements.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Received message format is incorrect.");
+        }
+    }
+
+    void ProcessPort2Message(string message)
+    {
+        // Split the message to get the data part
+        string[] parts = message.Split('%');
+        if (parts.Length > 1)
+        {
+            string inputString = parts[1];
+            Debug.Log("Extracted string: " + inputString);
+
+            // Clean and parse the string
+            string cleanString = inputString.Replace("'", "").Replace(" ", "").Replace("[", "").Replace("]", "");
+            Debug.Log("Parsed list: " + cleanString);
+
+            string[] stringArray = cleanString.Split(',');
+
+            // Convert each component to a float
+            List<float> decimalList = new List<float>();
+            foreach (string item in stringArray)
+            {
+                if (float.TryParse(item, out float value))
+                {
+                    decimalList.Add(value);
+                }
+            }
+
+            if (decimalList.Count >= 4)
+            {
+                float temperature = decimalList[0];
+                float pressure = decimalList[1];
+                float humidity = decimalList[2];
+                float airQuality = decimalList[3];
+
+                // Update UI elements on the main thread
+                UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                {
+                    if (yellowTemperatureTextUI != null) yellowTemperatureTextUI.text = $"Temperature (°C): {temperature}";
+                    if (yellowPressureTextUI != null) yellowPressureTextUI.text = $"Pressure (InchHg): {pressure}";
+                    if (yellowHumidityTextUI != null) yellowHumidityTextUI.text = $"Humidity (g/kg): {humidity}";
+                    if (yellowAirQualityTextUI != null) yellowAirQualityTextUI.text = $"Air Quality (kΩ): {airQuality}";
                 });
             }
             else
