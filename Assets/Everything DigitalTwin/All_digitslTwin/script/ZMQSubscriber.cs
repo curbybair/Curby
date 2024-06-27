@@ -20,6 +20,7 @@ public class ZMQSubscriber : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Starting ZMQSubscriber...");
         ConnectToZMQ();
     }
 
@@ -27,6 +28,10 @@ public class ZMQSubscriber : MonoBehaviour
     {
         try
         {
+            Debug.Log("Initializing AsyncIO and NetMQ...");
+            AsyncIO.ForceDotNet.Force(); // Ensure AsyncIO library is initialized
+            NetMQConfig.Cleanup(); // Clean up any previous NetMQ configurations
+
             // Initialize the subscriber socket
             subscriberSocket = new SubscriberSocket();
             subscriberSocket.Options.ReceiveHighWatermark = 1000;
@@ -56,69 +61,76 @@ public class ZMQSubscriber : MonoBehaviour
 
     void ReceiveMessages()
     {
-        var poller = new NetMQPoller { subscriberSocket };
-        subscriberSocket.ReceiveReady += OnReceiveReady;
-        poller.Run();
-    }
-
-    void OnReceiveReady(object sender, NetMQSocketEventArgs e)
-    {
-        if (subscriberSocket.TryReceiveFrameString(out string message))
+        while (running)
         {
-            Debug.Log("Received message: " + message);
-
-            // Split the message to get the data part
-            string[] parts = message.Split('%');
-            if (parts.Length > 1)
+            try
             {
-                string inputString = parts[1];
-                Debug.Log("Extracted string: " + inputString);
-
-                // Clean and parse the string
-                string cleanString = inputString.Replace("'", "").Replace(" ", "").Replace("[", "").Replace("]", "");
-                Debug.Log("Parsed list: " + cleanString);
-
-                string[] stringArray = cleanString.Split(',');
-
-                // Convert each component to a float
-                List<float> decimalList = new List<float>();
-                foreach (string item in stringArray)
+                if (subscriberSocket.TryReceiveFrameString(out string message))
                 {
-                    if (float.TryParse(item, out float value))
-                    {
-                        decimalList.Add(value);
-                    }
-                }
-
-                if (decimalList.Count >= 4)
-                {
-                    float temperature = decimalList[0];
-                    float pressure = decimalList[1];
-                    float humidity = decimalList[2];
-                    float airQuality = decimalList[3];
-
-                    // Update UI elements on the main thread
-                    UnityMainThreadDispatcher.Instance().Enqueue(() =>
-                    {
-                        if (temperatureTextUI != null) temperatureTextUI.text = $"Temperature: {temperature}";
-                        if (pressureTextUI != null) pressureTextUI.text = $"Pressure: {pressure}";
-                        if (humidityTextUI != null) humidityTextUI.text = $"Humidity: {humidity}";
-                        if (airQualityTextUI != null) airQualityTextUI.text = $"Air Quality: {airQuality}";
-                    });
+                    Debug.Log("Received message: " + message);
+                    ProcessMessage(message);
                 }
                 else
                 {
-                    Debug.LogWarning("Received data does not contain enough elements.");
+                    Debug.Log("No message received within timeout period.");
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("Error in ReceiveMessages: " + ex.Message + "\n" + ex.StackTrace);
+            }
+        }
+    }
+
+    void ProcessMessage(string message)
+    {
+        // Split the message to get the data part
+        string[] parts = message.Split('%');
+        if (parts.Length > 1)
+        {
+            string inputString = parts[1];
+            Debug.Log("Extracted string: " + inputString);
+
+            // Clean and parse the string
+            string cleanString = inputString.Replace("'", "").Replace(" ", "").Replace("[", "").Replace("]", "");
+            Debug.Log("Parsed list: " + cleanString);
+
+            string[] stringArray = cleanString.Split(',');
+
+            // Convert each component to a float
+            List<float> decimalList = new List<float>();
+            foreach (string item in stringArray)
+            {
+                if (float.TryParse(item, out float value))
+                {
+                    decimalList.Add(value);
+                }
+            }
+
+            if (decimalList.Count >= 4)
+            {
+                float temperature = decimalList[0];
+                float pressure = decimalList[1];
+                float humidity = decimalList[2];
+                float airQuality = decimalList[3];
+
+                // Update UI elements on the main thread
+                UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                {
+                    if (temperatureTextUI != null) temperatureTextUI.text = $"Temperature: {temperature}";
+                    if (pressureTextUI != null) pressureTextUI.text = $"Pressure: {pressure}";
+                    if (humidityTextUI != null) humidityTextUI.text = $"Humidity: {humidity}";
+                    if (airQualityTextUI != null) airQualityTextUI.text = $"Air Quality: {airQuality}";
+                });
             }
             else
             {
-                Debug.LogWarning("Received message format is incorrect.");
+                Debug.LogWarning("Received data does not contain enough elements.");
             }
         }
         else
         {
-            Debug.Log("No message received within timeout period.");
+            Debug.LogWarning("Received message format is incorrect.");
         }
     }
 

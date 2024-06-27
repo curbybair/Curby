@@ -4787,7 +4787,7 @@ GameObject:
   - component: {fileID: 152743640}
   - component: {fileID: 152743639}
   m_Layer: 0
-  m_Name: Text (TMP) (2)
+  m_Name: humidityTextUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35133,7 +35133,7 @@ GameObject:
   - component: {fileID: 1125753289}
   - component: {fileID: 1125753288}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: tempretureTextUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35177,7 +35177,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Data
+  m_text: 'Data
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -52239,7 +52241,7 @@ GameObject:
   - component: {fileID: 1593780669}
   - component: {fileID: 1593780668}
   m_Layer: 0
-  m_Name: Text (TMP) (1)
+  m_Name: pressureTextUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64359,7 +64361,7 @@ GameObject:
   - component: {fileID: 1980283347}
   - component: {fileID: 1980283346}
   m_Layer: 0
-  m_Name: Text (TMP) (3)
+  m_Name: airqualityTextUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
