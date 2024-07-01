@@ -6,7 +6,6 @@ using NetMQ;
 using NetMQ.Sockets;
 using TMPro;
 
-
 public class Combined : MonoBehaviour
 {
     private SubscriberSocket subscriberSocket;
@@ -25,8 +24,13 @@ public class Combined : MonoBehaviour
     public TextMeshProUGUI yellowHumidityTextUI;
     public TextMeshProUGUI yellowAirQualityTextUI;
 
-    // GameObject to update the X position of
-    public GameObject xPositionObject;
+    // New TextMeshProUGUI objects for positional data
+    public TextMeshProUGUI posXTextUI;
+    public TextMeshProUGUI posYTextUI;
+    public TextMeshProUGUI posZTextUI;
+
+    // GameObject to update the Y position of
+    public GameObject yPositionObject;
 
     void Start()
     {
@@ -113,7 +117,7 @@ public class Combined : MonoBehaviour
         }
         else if (message.StartsWith("Port1_Brown_Direc"))
         {
-            ProcessXPositionalMessage(message);
+            ProcessYPositionalMessage(message);
         }
         else
         {
@@ -183,7 +187,7 @@ public class Combined : MonoBehaviour
         }
     }
 
-    void ProcessXPositionalMessage(string message)
+    void ProcessYPositionalMessage(string message)
     {
         try
         {
@@ -200,19 +204,29 @@ public class Combined : MonoBehaviour
 
                 string[] stringArray = cleanString.Split(',');
 
-                // Convert the first component to a float (X position)
-                if (stringArray.Length >= 1)
+                // Convert the y component to a float (Y position)
+                if (stringArray.Length >= 2)
                 {
-                    float xPosition = float.Parse(stringArray[0]);
+                    float yPosition = float.Parse(stringArray[1]);
+                    Debug.Log("Parsed Y Position: " + yPosition);
 
-                    // Update GameObject X position on the main thread
+                    // Update GameObject Y position and text UI elements on the main thread
                     UnityMainThreadDispatcher.Instance().Enqueue(() =>
                     {
-                        if (xPositionObject != null)
+                        if (yPositionObject != null)
                         {
-                            Vector3 newXPosition = xPositionObject.transform.position;
-                            newXPosition.x = xPosition;
-                            xPositionObject.transform.position = newXPosition;
+                            Vector3 currentPosition = yPositionObject.transform.position;
+                            Debug.Log("Current Position before Update: " + currentPosition);
+                            currentPosition.y = 12;
+                            yPositionObject.transform.position = currentPosition;
+                            Debug.Log("Updated Position: " + yPositionObject.transform.position);
+
+                            // Update UI elements if available
+                            if (posYTextUI != null) posYTextUI.text = $"Y Position: {yPosition}";
+                        }
+                        else
+                        {
+                            Debug.LogWarning("yPositionObject is not assigned.");
                         }
                     });
                 }
@@ -228,7 +242,7 @@ public class Combined : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogError("Error in ProcessXPositionalMessage: " + ex.Message + "\n" + ex.StackTrace);
+            Debug.LogError("Error in ProcessYPositionalMessage: " + ex.Message + "\n" + ex.StackTrace);
         }
     }
 
