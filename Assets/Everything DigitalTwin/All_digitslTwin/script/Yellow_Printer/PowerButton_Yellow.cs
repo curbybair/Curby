@@ -14,40 +14,52 @@ public class PowerButton_Yellow : MonoBehaviour
     private bool isOn;
     private Renderer buttonRenderer;
 
+    private GameObject presser;
+    private AudioSource sound;
+    private bool isPressed;
+
     private void Start()
     {
         isOn = isOnByDefault;
         SetObjectState();
         buttonRenderer = GetComponent<Renderer>();
         UpdateButtonMaterial();
+        sound = GetComponent<AudioSource>();
+        isPressed = false;
     }
 
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
-
-        if (Input.GetMouseButtonDown(0))
+        if (!isPressed)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            // Change button position to indicate it's being pressed
+            transform.localPosition = new Vector3(0, 0.003f, 0);
+            presser = other.gameObject;
+            sound.Play();
+            isPressed = true;
+        }
+    }
 
-            if (Physics.Raycast(ray, out hit))
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == presser)
+        {
+            // Change button position back to the original position
+            transform.localPosition = new Vector3(0, 0.015f, 0);
+            isPressed = false;
+
+            // Toggle the state of the button
+            if (isOn)
             {
-                if (hit.collider.gameObject == gameObject)
-                {
-
-                    if (isOn)
-                    {
-                        TurnOff();
-                        bed.IsTemperatureEndpointActive = false;
-                        tool.IsTemperatureEndpointActive = false;
-                    }
-                    else
-                    {
-                        TurnOn();
-                        bed.IsTemperatureEndpointActive = true;
-                        tool.IsTemperatureEndpointActive = true;
-                    }
-                }
+                TurnOff();
+                bed.IsTemperatureEndpointActive = false;
+                tool.IsTemperatureEndpointActive = false;
+            }
+            else
+            {
+                TurnOn();
+                bed.IsTemperatureEndpointActive = true;
+                tool.IsTemperatureEndpointActive = true;
             }
         }
     }
@@ -78,16 +90,7 @@ public class PowerButton_Yellow : MonoBehaviour
     {
         if (buttonRenderer != null)
         {
-            if (isOn)
-            {
-                buttonRenderer.material = onMaterial;
-            }
-            else
-            {
-                buttonRenderer.material = offMaterial;
-            }
+            buttonRenderer.material = isOn ? onMaterial : offMaterial;
         }
     }
 }
-
-
