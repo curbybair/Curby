@@ -24,14 +24,6 @@ public class Combined : MonoBehaviour
     public TextMeshProUGUI yellowHumidityTextUI;
     public TextMeshProUGUI yellowAirQualityTextUI;
 
-    // New TextMeshProUGUI objects for positional data
-    public TextMeshProUGUI posXTextUI;
-    public TextMeshProUGUI posYTextUI;
-    public TextMeshProUGUI posZTextUI;
-
-    // GameObject to update the Y position of
-    public GameObject yPositionObject;
-
     void Start()
     {
         Debug.Log("Starting ZMQCombinedSubscriber...");
@@ -58,12 +50,10 @@ public class Combined : MonoBehaviour
             // Subscribe to the topics
             string topic1 = "Port0_Brown_Temp";
             string topic2 = "Port3_yellow_Temp";
-            string topic3 = "Port1_Brown_Direc";
             subscriberSocket.Subscribe(topic1);
             subscriberSocket.Subscribe(topic2);
-            subscriberSocket.Subscribe(topic3);
 
-            Debug.Log("Connected to ZMQ server and subscribed to topics: " + topic1 + ", " + topic2 + ", " + topic3);
+            Debug.Log("Connected to ZMQ server and subscribed to topics: " + topic1 + ", " + topic2);
 
             // Start listening for messages
             running = true;
@@ -114,10 +104,6 @@ public class Combined : MonoBehaviour
         else if (message.StartsWith("Port3_yellow_Temp"))
         {
             ProcessTemperatureMessage(message, true);
-        }
-        else if (message.StartsWith("Port1_Brown_Direc"))
-        {
-            ProcessYPositionalMessage(message);
         }
         else
         {
@@ -184,65 +170,6 @@ public class Combined : MonoBehaviour
         else
         {
             Debug.LogWarning("Received message format is incorrect.");
-        }
-    }
-
-    void ProcessYPositionalMessage(string message)
-    {
-        try
-        {
-            // Split the message to get the data part
-            string[] parts = message.Split('%');
-            if (parts.Length > 1)
-            {
-                string inputString = parts[1];
-                Debug.Log("Extracted string: " + inputString);
-
-                // Clean and parse the string
-                string cleanString = inputString.Replace("'", "").Replace(" ", "").Replace("[", "").Replace("]", "");
-                Debug.Log("Parsed list: " + cleanString);
-
-                string[] stringArray = cleanString.Split(',');
-
-                // Convert the y component to a float (Y position)
-                if (stringArray.Length >= 2)
-                {
-                    float yPosition = float.Parse(stringArray[1]);
-                    Debug.Log("Parsed Y Position: " + yPosition);
-
-                    // Update GameObject Y position and text UI elements on the main thread
-                    UnityMainThreadDispatcher.Instance().Enqueue(() =>
-                    {
-                        if (yPositionObject != null)
-                        {
-                            Vector3 currentPosition = yPositionObject.transform.position;
-                            Debug.Log("Current Position before Update: " + currentPosition);
-                            currentPosition.y = 12;
-                            yPositionObject.transform.position = currentPosition;
-                            Debug.Log("Updated Position: " + yPositionObject.transform.position);
-
-                            // Update UI elements if available
-                            if (posYTextUI != null) posYTextUI.text = $"Y Position: {yPosition}";
-                        }
-                        else
-                        {
-                            Debug.LogWarning("yPositionObject is not assigned.");
-                        }
-                    });
-                }
-                else
-                {
-                    Debug.LogWarning("Received data does not contain enough elements.");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("Received message format is incorrect.");
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("Error in ProcessYPositionalMessage: " + ex.Message + "\n" + ex.StackTrace);
         }
     }
 
