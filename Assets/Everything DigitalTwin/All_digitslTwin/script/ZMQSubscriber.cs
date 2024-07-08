@@ -44,12 +44,12 @@ public class ZMQSubscriber : MonoBehaviour
             subscriberSocket.Options.Linger = TimeSpan.Zero;
 
             // Connect to the ZMQ server
-            string raspberryPiIp = "tcp://192.168.1.111:5555";  // Replace with your server address
+            string raspberryPiIp = "tcp://192.168.1.111:5555";
             subscriberSocket.Connect(raspberryPiIp);
 
             // Subscribe to the topics
             string topic1 = "Port0_Brown_Temp";
-            string topic2 = "Port3_yellow_Temp";
+            string topic2 = "Port3_Yellow_Temp";
             subscriberSocket.Subscribe(topic1);
             subscriberSocket.Subscribe(topic2);
 
@@ -97,9 +97,9 @@ public class ZMQSubscriber : MonoBehaviour
         {
             ProcessPort0Message(message);
         }
-        else if (message.StartsWith("Port3_yellow_Temp"))
+        else if (message.StartsWith("Port3_Yellow_Temp"))
         {
-            ProcessPort2Message(message);
+            ProcessPort3Message(message);
         }
         else
         {
@@ -139,6 +139,8 @@ public class ZMQSubscriber : MonoBehaviour
                 float humidity = decimalList[2];
                 float airQuality = decimalList[3];
 
+                Debug.Log($"Updating UI with values - Temperature: {temperature}, Pressure: {pressure}, Humidity: {humidity}, Air Quality: {airQuality}");
+
                 // Update UI elements on the main thread
                 UnityMainThreadDispatcher.Instance().Enqueue(() =>
                 {
@@ -159,7 +161,7 @@ public class ZMQSubscriber : MonoBehaviour
         }
     }
 
-    void ProcessPort2Message(string message)
+    void ProcessPort3Message(string message)
     {
         // Split the message to get the data part
         string[] parts = message.Split('%');
@@ -190,6 +192,8 @@ public class ZMQSubscriber : MonoBehaviour
                 float pressure = decimalList[1];
                 float humidity = decimalList[2];
                 float airQuality = decimalList[3];
+
+                Debug.Log($"Updating Yellow UI with values - Temperature: {temperature}, Pressure: {pressure}, Humidity: {humidity}, Air Quality: {airQuality}");
 
                 // Update UI elements on the main thread
                 UnityMainThreadDispatcher.Instance().Enqueue(() =>
