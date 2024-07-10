@@ -84,7 +84,7 @@ public class main_ui_control : MonoBehaviour
         position_j6_txt.text = "0.00";
 
         // Robot IP Address
-        ip_address_txt.text = "192.168.1.113";
+        ip_address_txt.text = "192.168.1.112";
 
         // Auxiliary first command -> Write initialization position/rotation with acceleration/time to the robot controller
         // command (string value)

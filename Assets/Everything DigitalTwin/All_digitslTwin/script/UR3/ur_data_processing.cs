@@ -88,11 +88,11 @@ public class ur_data_processing : MonoBehaviour
     {
         // Initialization {TCP/IP Universal Robots}
         //  Read Data:
-        UR_Stream_Data.ip_address = "192.168.1.121";
+        UR_Stream_Data.ip_address = "192.168.1.112";
         //  Communication speed: CB-Series 125 Hz (8 ms), E-Series 500 Hz (2 ms)
         UR_Stream_Data.time_step = 8;
         //  Write Data:
-        UR_Control_Data.ip_address = "192.168.1.121";
+        UR_Control_Data.ip_address = "192.168.1.112";
         //  Communication speed: CB-Series 125 Hz (8 ms), E-Series 500 Hz (2 ms)
         UR_Control_Data.time_step = 8;
 
