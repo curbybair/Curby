@@ -3,7 +3,6 @@ using System.Threading;
 using UnityEngine;
 using NetMQ;
 using NetMQ.Sockets;
-using TMPro;
 
 public class DistanceSensorHandler : MonoBehaviour
 {
@@ -14,33 +13,52 @@ public class DistanceSensorHandler : MonoBehaviour
     public GameObject extruder; // GameObject representing the extruder
     public GameObject bed; // GameObject representing the bed
     public GameObject xLeadingRod; // GameObject representing the x leading rod
-    public TextMeshProUGUI positionText;
 
     public float smoothSpeed = 0.125f; // Speed of interpolation
-    public float scalingFactor = 1.0f; // Scaling factor to control the movement scale
+    public Vector3 bedOffset = Vector3.zero; // Public offset for the bed
 
     private Vector3 initialExtruderPosition;
-    private Vector3 targetExtruderPosition;
-
     private Vector3 initialBedPosition;
-    private Vector3 targetBedPosition;
-
     private Vector3 initialXLeadingRodPosition;
+
+    private Vector3 targetExtruderPosition;
+    private Vector3 targetBedPosition;
     private Vector3 targetXLeadingRodPosition;
 
     void Start()
     {
         Debug.Log("Starting DistanceSensorHandler...");
 
-        // Store initial positions
-        initialExtruderPosition = extruder.transform.position;
-        initialBedPosition = bed.transform.position;
-        initialXLeadingRodPosition = xLeadingRod.transform.position;
+        // Initialize initial positions with current positions
+        if (extruder != null)
+        {
+            initialExtruderPosition = extruder.transform.position;
+            targetExtruderPosition = initialExtruderPosition;
+        }
+        else
+        {
+            Debug.LogError("Extruder GameObject is not assigned!");
+        }
 
-        // Initialize target positions with initial positions
-        targetExtruderPosition = initialExtruderPosition;
-        targetBedPosition = initialBedPosition;
-        targetXLeadingRodPosition = initialXLeadingRodPosition;
+        if (bed != null)
+        {
+            initialBedPosition = bed.transform.position + bedOffset;
+            targetBedPosition = initialBedPosition;
+        }
+        else
+        {
+            Debug.LogError("Bed GameObject is not assigned!");
+        }
+
+        if (xLeadingRod != null)
+        {
+            initialXLeadingRodPosition = xLeadingRod.transform.position;
+            targetXLeadingRodPosition = initialXLeadingRodPosition;
+        }
+        else
+        {
+            Debug.LogError("xLeadingRod GameObject is not assigned!");
+        }
 
         ConnectToZMQ();
     }
@@ -48,9 +66,14 @@ public class DistanceSensorHandler : MonoBehaviour
     void Update()
     {
         // Interpolate positions
-        extruder.transform.position = Vector3.Lerp(extruder.transform.position, targetExtruderPosition, smoothSpeed * Time.deltaTime);
-        bed.transform.position = Vector3.Lerp(bed.transform.position, targetBedPosition, smoothSpeed * Time.deltaTime);
-        xLeadingRod.transform.position = Vector3.Lerp(xLeadingRod.transform.position, targetXLeadingRodPosition, smoothSpeed * Time.deltaTime);
+        if (extruder != null)
+            extruder.transform.position = Vector3.Lerp(extruder.transform.position, targetExtruderPosition, smoothSpeed * Time.deltaTime);
+
+        if (bed != null)
+            bed.transform.position = Vector3.Lerp(bed.transform.position, targetBedPosition, smoothSpeed * Time.deltaTime);
+
+        if (xLeadingRod != null)
+            xLeadingRod.transform.position = Vector3.Lerp(xLeadingRod.transform.position, targetXLeadingRodPosition, smoothSpeed * Time.deltaTime);
     }
 
     void ConnectToZMQ()
@@ -71,7 +94,7 @@ public class DistanceSensorHandler : MonoBehaviour
             subscriberSocket.Connect(raspberryPiIp);
 
             // Subscribe to the specific topic
-            string topic = "Port1_Brown_Direc";
+            string topic = "Port0_Grey_Position";
             subscriberSocket.Subscribe(topic);
             Debug.Log("Subscribed to topic: " + topic);
 
@@ -93,7 +116,7 @@ public class DistanceSensorHandler : MonoBehaviour
         {
             try
             {
-                if (subscriberSocket.TryReceiveFrameString(TimeSpan.FromMilliseconds(1000), out string message)) // Increased timeout to 1000 ms
+                if (subscriberSocket.TryReceiveFrameString(TimeSpan.FromMilliseconds(2000), out string message)) // Increased timeout to 2000 ms
                 {
                     Debug.Log("Received message: " + message);
                     ProcessMessage(message);
@@ -133,32 +156,37 @@ public class DistanceSensorHandler : MonoBehaviour
                     float.TryParse(stringArray[1], out float zPositionCm) &&
                     float.TryParse(stringArray[2], out float yPositionCm))
                 {
-                    // Convert cm to meters and apply scaling factor
-                    float xPositionMeters = (xPositionCm / 100.0f) * scalingFactor;
-                    float zPositionMeters = (zPositionCm / 100.0f) * scalingFactor;
-                    float yPositionMeters = (yPositionCm / 100.0f) * scalingFactor;
+                    // Convert cm to meters
+                    float xPositionMeters = xPositionCm / 100.0f;
+                    float zPositionMeters = zPositionCm / 100.0f;
+                    float yPositionMeters = yPositionCm / 100.0f;
 
                     Debug.Log($"Converted Positions - X: {xPositionMeters} m, Z: {zPositionMeters} m, Y: {yPositionMeters} m");
 
-                    // Calculate target positions by adding to initial positions
-                    Vector3 newExtruderPosition = initialExtruderPosition;
-                    newExtruderPosition.x = initialExtruderPosition.x + xPositionMeters;
-
-                    Vector3 newBedPosition = initialBedPosition;
-                    newBedPosition.z = initialBedPosition.z + zPositionMeters;
-
-                    Vector3 newXLeadingRodPosition = initialXLeadingRodPosition;
-                    newXLeadingRodPosition.y = initialXLeadingRodPosition.y + yPositionMeters;
+                    // Update target positions relative to initial positions with negative adjustments for x and y
+                    Vector3 newExtruderPosition = initialExtruderPosition + new Vector3(-xPositionMeters, -yPositionMeters, 0);
+                    Vector3 newBedPosition = initialBedPosition + new Vector3(0, 0, zPositionMeters);
+                    Vector3 newXLeadingRodPosition = initialXLeadingRodPosition + new Vector3(0, -yPositionMeters, 0);
 
                     // Update target positions on the main thread
                     UnityMainThreadDispatcher.Instance().Enqueue(() =>
                     {
-                        targetExtruderPosition = newExtruderPosition;
-                        targetBedPosition = newBedPosition;
-                        targetXLeadingRodPosition = newXLeadingRodPosition;
-                        positionText.text = $"X: {newExtruderPosition.x:F2} m, Y: {newXLeadingRodPosition.y:F2} m, Z: {newBedPosition.z:F2} m";
+                        if (extruder != null)
+                        {
+                            targetExtruderPosition = newExtruderPosition;
+                        }
 
-                        Debug.Log($"New Positions - X: {newExtruderPosition.x} m, Y: {newXLeadingRodPosition.y} m, Z: {newBedPosition.z} m");
+                        if (bed != null)
+                        {
+                            targetBedPosition = newBedPosition;
+                        }
+
+                        if (xLeadingRod != null)
+                        {
+                            targetXLeadingRodPosition = newXLeadingRodPosition;
+                        }
+
+                        Debug.Log($"Updated Positions - Extruder: {extruder.transform.position}, Bed: {bed.transform.position}, xLeadingRod: {xLeadingRod.transform.position}");
                     });
                 }
                 else
