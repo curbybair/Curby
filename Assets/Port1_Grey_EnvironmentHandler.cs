@@ -7,12 +7,12 @@ public class Port1_Grey_EnvironmentHandler : MonoBehaviour
     public TMP_Text humidityText;
     public TMP_Text airQualityText;
 
-    private ZMQSubscriber zmqSubscriber;
+    //private ZMQSubscriber zmqSubscriber;
 
     void Start()
     {
-        zmqSubscriber = gameObject.AddComponent<ZMQSubscriber>();
-        zmqSubscriber.Initialize("tcp://192.168.1.111:5555", "Port1_Grey_Environment", ProcessMessage);
+       // zmqSubscriber = gameObject.AddComponent<ZMQSubscriber>();
+        //zmqSubscriber.Initialize("tcp://192.168.1.111:5555", "Port1_Grey_Environment", ProcessMessage);
     }
 
     void ProcessMessage(string message)

@@ -6794,7 +6794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &128464034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7146,8 +7146,6 @@ GameObject:
   - component: {fileID: 135347799}
   - component: {fileID: 135347798}
   - component: {fileID: 135347801}
-  - component: {fileID: 135347803}
-  - component: {fileID: 135347802}
   - component: {fileID: 135347804}
   m_Layer: 0
   m_Name: PowerButton
@@ -7258,40 +7256,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
---- !u!114 &135347802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135347796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a935c05417e9b441a93413fcfdc8543, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  octoPrintUrl: http://192.168.1.101/
-  apiKey: 151B3189E551406F9C93A218FD50FD0E
-  period: 2
---- !u!114 &135347803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135347796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e81d5a36319bf1949999b4bdfed5850c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tool: {fileID: 135347802}
-  bed: {fileID: 135347802}
-  objectToToggle: {fileID: 135347796}
-  isOnByDefault: 1
-  offMaterial: {fileID: 5262920052370854979, guid: 6c27e497a7b94ef45a61307e6bf113f2,
-    type: 3}
-  onMaterial: {fileID: 2100000, guid: c5f876d53ad2e864685d876738f757d0, type: 2}
 --- !u!65 &135347804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8818,7 +8782,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 169551301}
-  - component: {fileID: 169551302}
   m_Layer: 0
   m_Name: Printer Audio
   m_TagString: Untagged
@@ -8840,23 +8803,6 @@ Transform:
   m_Father: {fileID: 4669163915473828908}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &169551302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169551300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f54394bc066b2064898c88d3d614257e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ipAddress: 192.168.1.137
-  port1: 12345
-  port2: 12346
-  audioSourceObject1: {fileID: 8839164219932642857}
-  audioSourceObject2: {fileID: 3650608929511045936}
 --- !u!1 &170880102
 GameObject:
   m_ObjectHideFlags: 0
@@ -9611,7 +9557,6 @@ GameObject:
   - component: {fileID: 192094337}
   - component: {fileID: 192094339}
   - component: {fileID: 192094338}
-  - component: {fileID: 192094341}
   - component: {fileID: 192094340}
   m_Layer: 0
   m_Name: Printer Head
@@ -9691,30 +9636,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192094336}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ccf0ecf8611fbc4b97fbcae3c793aa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minY: 2.24
-  maxY: 2.57
-  moveSpeed: 0.05
-  y_yellow: {fileID: 192094341}
---- !u!114 &192094341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192094336}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: CA29191915284A00A0207FB0213F0275
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 2
 --- !u!1 &193755197
@@ -10497,7 +10426,7 @@ GameObject:
   - component: {fileID: 202344134}
   - component: {fileID: 202344133}
   m_Layer: 0
-  m_Name: Printer 1 Text Mesh
+  m_Name: Printer 2 Text Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10530,7 +10459,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202344131}
-  m_Text: 'Printer 1:'
+  m_Text: 'Printer 2:'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -12350,7 +12279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225647807}
   m_LocalRotation: {x: 0.5, y: -0.50000006, z: -0.50000006, w: 0.5}
-  m_LocalPosition: {x: -1945, y: 3212, z: 3093}
+  m_LocalPosition: {x: -1805, y: 2798, z: 2845}
   m_LocalScale: {x: 1182.8744, y: 1137.9355, z: 1070.5864}
   m_Children:
   - {fileID: 432935721}
@@ -12482,6 +12411,101 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 235100178}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &238908798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 238908799}
+  - component: {fileID: 238908801}
+  - component: {fileID: 238908800}
+  m_Layer: 0
+  m_Name: GreyStatus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &238908799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238908798}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -4.6, y: -0, z: 4.83}
+  m_LocalScale: {x: 0.85, y: 1.2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8839164219962519529}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!102 &238908800
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238908798}
+  m_Text: 'Status:
+
+'
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 16
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &238908801
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238908798}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &239571784
 GameObject:
   m_ObjectHideFlags: 0
@@ -12955,6 +12979,8 @@ GameObject:
   - component: {fileID: 248217124}
   - component: {fileID: 248217123}
   - component: {fileID: 248217127}
+  - component: {fileID: 248217129}
+  - component: {fileID: 248217128}
   m_Layer: 0
   m_Name: External reading Obove printer 1
   m_TagString: Untagged
@@ -12970,7 +12996,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248217121}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 6251}
+  m_LocalPosition: {x: 0, y: 0, z: 6452}
   m_LocalScale: {x: 12.00495, y: 19.90059, z: 9.612418}
   m_Children:
   - {fileID: 202344132}
@@ -13078,6 +13104,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7457e03817d738a4e936cb42f0d2eac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &248217128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248217121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28f1a5229a5b62d45bada80136cb3bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMesh1: {fileID: 727421078}
+  textMesh2: {fileID: 202344133}
+  textMesh3: {fileID: 1520939601}
+  textMesh4: {fileID: 2087943786}
+  Progress_display: {fileID: 8839164220550892153}
+--- !u!114 &248217129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248217121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a0451b8517f3244bc7f377c1f1e46c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Status_text_for_Brown_Printer: {fileID: 238908800}
+  Status_text_for_Yellow_Printer: {fileID: 202344133}
+  octoPrintJobDisplay: {fileID: 8839164220550892153}
 --- !u!1 &248682297
 GameObject:
   m_ObjectHideFlags: 0
@@ -17859,17 +17917,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 357175699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aff7fe7d00d1ca4d8a040ffd80bb371, type: 3}
+  m_Script: {fileID: 11500000, guid: a0a76947e5414be42af53d90da775389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 293502128}
+  rockerSwitch: {fileID: 0}
+  lcdScreen: {fileID: 0}
+  onMaterial: {fileID: 0}
+  offMaterial: {fileID: 0}
   onPress:
     m_PersistentCalls:
       m_Calls: []
   onRelease:
     m_PersistentCalls:
       m_Calls: []
-  robot: {fileID: 1175690274}
 --- !u!54 &357175702
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19233,7 +19293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &402963811
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29292,17 +29352,14 @@ GameObject:
   - component: {fileID: 626590311}
   - component: {fileID: 626590314}
   - component: {fileID: 626590313}
-  - component: {fileID: 626590315}
-  - component: {fileID: 626590317}
   - component: {fileID: 626590316}
-  - component: {fileID: 626590312}
   m_Layer: 0
   m_Name: PowerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &626590311
 Transform:
   m_ObjectHideFlags: 0
@@ -29310,26 +29367,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626590310}
-  m_LocalRotation: {x: 0.4159226, y: -0.4159227, z: -0.5718465, w: 0.5718464}
-  m_LocalPosition: {x: -2822.1921, y: 2835.1545, z: 4256.9683}
-  m_LocalScale: {x: 79.59226, y: 96.766464, z: 45.52516}
-  m_Children: []
+  m_LocalRotation: {x: -0.00000014901154, y: 0.79307836, z: -0.00000023841847, w: 0.6091196}
+  m_LocalPosition: {x: -2829.9504, y: 2838.3826, z: 4243.365}
+  m_LocalScale: {x: 132.4654, y: 78.95369, z: 65.61542}
+  m_Children:
+  - {fileID: 1039977027}
   m_Father: {fileID: 8986331944828008652}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: -17.941, y: 0, z: 0}
---- !u!65 &626590312
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626590310}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2133373, y: 2.073755, z: 1.7728666}
-  m_Center: {x: -0.04985278, y: 0.34344906, z: -0.22339395}
+  m_LocalEulerAnglesHint: {x: 0, y: 104.948006, z: 0}
 --- !u!23 &626590313
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -29377,34 +29422,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626590310}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &626590315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626590310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 626590310}
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
 --- !u!114 &626590316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29420,25 +29437,6 @@ MonoBehaviour:
   octoPrintUrl: http://192.168.1.102/
   apiKey: 49C7B194E15B41738324436780C19032
   period: 2
---- !u!114 &626590317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626590310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7346351cd7d0d1149b98cb3254a72c59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tool: {fileID: 626590316}
-  bed: {fileID: 626590316}
-  objectToToggle: {fileID: 626590310}
-  isOnByDefault: 1
-  offMaterial: {fileID: 5262920052370854979, guid: 6c27e497a7b94ef45a61307e6bf113f2,
-    type: 3}
-  onMaterial: {fileID: 2100000, guid: c5f876d53ad2e864685d876738f757d0, type: 2}
 --- !u!1 &627271166
 GameObject:
   m_ObjectHideFlags: 0
@@ -34590,7 +34588,7 @@ GameObject:
   - component: {fileID: 727421079}
   - component: {fileID: 727421078}
   m_Layer: 0
-  m_Name: 'Printer 2 Text Mesh '
+  m_Name: 'Printer 1 Text Mesh '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34623,7 +34621,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727421076}
-  m_Text: 'Printer 2:
+  m_Text: 'Printer 1:
 
 '
   m_OffsetZ: 0
@@ -38652,7 +38650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &817290422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40906,9 +40904,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: CA29191915284A00A0207FB0213F0275
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 2
 --- !u!1 &873062376
@@ -49643,6 +49641,92 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039861416}
   m_Mesh: {fileID: -8007809289395427234, guid: d8501252504affc4d86aca05e650caa9, type: 3}
+--- !u!1 &1039977026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1039977027}
+  - component: {fileID: 1039977030}
+  - component: {fileID: 1039977029}
+  - component: {fileID: 1039977028}
+  m_Layer: 9
+  m_Name: 'Collider '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1039977027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039977026}
+  m_LocalRotation: {x: -0.7675244, y: 0.000000029802312, z: -0.00000025331966, w: 0.6410197}
+  m_LocalPosition: {x: 0.04, y: -0.13, z: -0.21}
+  m_LocalScale: {x: 1.3375517, y: 0.09905378, z: 1.9122484}
+  m_Children: []
+  m_Father: {fileID: 626590311}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -100.264, y: 0, z: -0.000015258789}
+--- !u!114 &1039977028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039977026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0a76947e5414be42af53d90da775389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rockerSwitch: {fileID: 626590310}
+  lcdScreen: {fileID: 8839164220550892150}
+  onMaterial: {fileID: -3098868360003741996, guid: 6c27e497a7b94ef45a61307e6bf113f2,
+    type: 3}
+  offMaterial: {fileID: -8602484825647095488, guid: 6c27e497a7b94ef45a61307e6bf113f2,
+    type: 3}
+  onPress:
+    m_PersistentCalls:
+      m_Calls: []
+  onRelease:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!54 &1039977029
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039977026}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1039977030
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039977026}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.705866, y: 1.0185989, z: 0.710927}
+  m_Center: {x: -0.059380133, y: 0.7593554, z: -0.024744313}
 --- !u!1 &1040090624
 GameObject:
   m_ObjectHideFlags: 0
@@ -50531,7 +50615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Display_Image: {fileID: 1726287711}
   startButton: {fileID: 328533251}
-  streamUrl: http://192.168.1.101/webcam/?action=stream
+  streamUrl: http://192.168.1.103/webcam/?action=stream
 --- !u!4 &1055570993
 Transform:
   m_ObjectHideFlags: 0
@@ -57750,7 +57834,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200064518}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 6251.001}
+  m_LocalPosition: {x: 0, y: 0, z: 6574}
   m_LocalScale: {x: 12.004952, y: 19.90059, z: 9.612417}
   m_Children:
   - {fileID: 1249663153}
@@ -57764,7 +57848,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2843.001, y: 1620.0022}
+  m_AnchoredPosition: {x: -3104, y: 1620}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1200064520
@@ -63643,7 +63727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1328606580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65788,8 +65872,8 @@ GameObject:
   - component: {fileID: 1372830550}
   - component: {fileID: 1372830553}
   - component: {fileID: 1372830552}
-  - component: {fileID: 1372830554}
   - component: {fileID: 1372830551}
+  - component: {fileID: 1372830554}
   m_Layer: 0
   m_Name: node_id8
   m_TagString: Untagged
@@ -65887,9 +65971,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: CA29191915284A00A0207FB0213F0275
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 2
 --- !u!1 &1373111170
@@ -69423,8 +69507,6 @@ GameObject:
   - component: {fileID: 1428144006}
   - component: {fileID: 1428144009}
   - component: {fileID: 1428144008}
-  - component: {fileID: 1428144010}
-  - component: {fileID: 1428144007}
   m_Layer: 0
   m_Name: 3D Printing Whteboard
   m_TagString: Untagged
@@ -69448,23 +69530,6 @@ Transform:
   m_Father: {fileID: 7786390629820534259}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1428144007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428144005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: CA29191915284A00A0207FB0213F0275
-  printer1URL: http://192.168.1.101/api/job
-  printer2URL: http://192.168.1.102/api/job
-  period: 2
 --- !u!23 &1428144008
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -69512,23 +69577,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428144005}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1428144010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428144005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28f1a5229a5b62d45bada80136cb3bf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textMesh1: {fileID: 202344133}
-  textMesh2: {fileID: 727421078}
-  textMesh3: {fileID: 2087943786}
-  textMesh4: {fileID: 1520939601}
-  Progress_display: {fileID: 1428144007}
 --- !u!1 &1428759180
 GameObject:
   m_ObjectHideFlags: 0
@@ -73274,99 +73322,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507534289}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1512098963
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1512098964}
-  - component: {fileID: 1512098966}
-  - component: {fileID: 1512098965}
-  m_Layer: 0
-  m_Name: Status text for brown
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1512098964
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512098963}
-  m_LocalRotation: {x: 0.7071067, y: -0.0000000036931893, z: -0.000000029802315, w: 0.70710677}
-  m_LocalPosition: {x: -4.6, y: -0, z: 5}
-  m_LocalScale: {x: 0.8592495, y: 1.3713837, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8839164219962519529}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!102 &1512098965
-TextMesh:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512098963}
-  m_Text: "Status: \nN/A"
-  m_OffsetZ: 0
-  m_CharacterSize: 1
-  m_LineSpacing: 1
-  m_Anchor: 0
-  m_Alignment: 0
-  m_TabSize: 4
-  m_FontSize: 0
-  m_FontStyle: 0
-  m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
---- !u!23 &1512098966
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512098963}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!1 &1516732339
 GameObject:
   m_ObjectHideFlags: 0
@@ -73508,7 +73463,7 @@ GameObject:
   - component: {fileID: 1520939602}
   - component: {fileID: 1520939601}
   m_Layer: 0
-  m_Name: 'Time elapsed (Printer 2):'
+  m_Name: 'Time elapsed (Printer 1):'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90744,8 +90699,8 @@ GameObject:
   - component: {fileID: 1867671644}
   - component: {fileID: 1867671647}
   - component: {fileID: 1867671646}
-  - component: {fileID: 1867671648}
   - component: {fileID: 1867671645}
+  - component: {fileID: 1867671648}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -90841,9 +90796,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: CA29191915284A00A0207FB0213F0275
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 2
 --- !u!1 &1869993814
@@ -92211,7 +92166,7 @@ GameObject:
   - component: {fileID: 1902913912}
   - component: {fileID: 1902913915}
   - component: {fileID: 1902913914}
-  - component: {fileID: 1902913916}
+  - component: {fileID: 1902913913}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -92233,6 +92188,23 @@ Transform:
   m_Father: {fileID: 1372830550}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1902913913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902913911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
+  printer2URL: http://192.168.1.102/api/job
+  period: 2
 --- !u!23 &1902913914
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -92280,23 +92252,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902913911}
   m_Mesh: {fileID: -2124705421725058983, guid: 4d814af82f4ecca41a815c5ea2727c33, type: 3}
---- !u!114 &1902913916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1902913911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: CA29191915284A00A0207FB0213F0275
-  printer1URL: http://192.168.1.101/api/job
-  printer2URL: http://192.168.1.102/api/job
-  period: 2
 --- !u!1 &1907106197
 GameObject:
   m_ObjectHideFlags: 0
@@ -99132,7 +99087,7 @@ GameObject:
   - component: {fileID: 2087943787}
   - component: {fileID: 2087943786}
   m_Layer: 0
-  m_Name: 'Time elapsed (Printer 1):'
+  m_Name: 'Time elapsed (Printer 2):'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101625,9 +101580,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: CA29191915284A00A0207FB0213F0275
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 2
 --- !u!1 &919132147554568636
@@ -101915,9 +101870,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: 49C7B194E15B41738324436780C19032
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 2
 --- !u!33 &1954724335047609987
@@ -102982,7 +102937,6 @@ GameObject:
   - component: {fileID: 8264932235729620465}
   - component: {fileID: 8601646266573004581}
   - component: {fileID: 5091180995516484133}
-  - component: {fileID: 3650608929511045937}
   m_Layer: 0
   m_Name: Extruder
   m_TagString: Untagged
@@ -102990,102 +102944,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!82 &3650608929511045937
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3650608929511045936}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!23 &3679438919874297690
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -103272,9 +103130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: CA29191915284A00A0207FB0213F0275
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: CA29191915D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 2
 --- !u!1001 &4208377433219903991
@@ -104723,7 +104581,6 @@ GameObject:
   - component: {fileID: 9100080781227242660}
   - component: {fileID: 2557015896143472743}
   - component: {fileID: 7094058419722545615}
-  - component: {fileID: 7094058419722545614}
   m_Layer: 0
   m_Name: Printer Bed
   m_TagString: Untagged
@@ -104731,22 +104588,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7094058419722545614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7094058419722545613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39bfbac207e66e3479f973a5875d86fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minY: -0.5
-  maxY: -0.335
-  moveSpeed: 0.055
-  y_yellow: {fileID: 7094058419722545615}
 --- !u!114 &7094058419722545615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104759,9 +104600,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: 49C7B194E15B41738324436780C19032
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 2
 --- !u!1 &7126716842549339994
@@ -106338,7 +106179,6 @@ GameObject:
   - component: {fileID: 8839164219932642858}
   - component: {fileID: 8839164219932642860}
   - component: {fileID: 8839164219932642859}
-  - component: {fileID: 8839164219932642861}
   m_Layer: 0
   m_Name: Extruder
   m_TagString: Untagged
@@ -106409,102 +106249,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8839164219932642857}
   m_Mesh: {fileID: -2354842673350866518, guid: 483c3bb977b79974181fbb04770817e1, type: 3}
---- !u!82 &8839164219932642861
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8839164219932642857}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &8839164219941582104
 GameObject:
   m_ObjectHideFlags: 0
@@ -106644,7 +106388,7 @@ Transform:
   m_LocalScale: {x: 29.519491, y: 19.470087, z: 15.958172}
   m_Children:
   - {fileID: 1465622414}
-  - {fileID: 1512098964}
+  - {fileID: 238908799}
   m_Father: {fileID: 8839164220926514999}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
@@ -106721,7 +106465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a0451b8517f3244bc7f377c1f1e46c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Status_text_for_Brown_Printer: {fileID: 1512098965}
+  Status_text_for_Brown_Printer: {fileID: 238908800}
   Status_text_for_Yellow_Printer: {fileID: 1332352761}
   octoPrintJobDisplay: {fileID: 8839164219962519534}
 --- !u!114 &8839164219962519534
@@ -106736,9 +106480,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: CA29191915284A00A0207FB0213F0275
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 5
 --- !u!114 &8839164219962519535
@@ -106753,8 +106497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a935c05417e9b441a93413fcfdc8543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  octoPrintUrl: http://192.168.1.101/
-  apiKey: 151B3189E551406F9C93A218FD50FD0E
+  octoPrintUrl: http://192.168.1.103/
+  apiKey: 5D44B0739CB04110871B24C202512986
   period: 10
 --- !u!114 &8839164219962519536
 MonoBehaviour:
@@ -106829,7 +106573,6 @@ GameObject:
   - component: {fileID: 8839164220027212447}
   - component: {fileID: 8839164220027212433}
   - component: {fileID: 8839164220027212432}
-  - component: {fileID: 8839164220027212449}
   - component: {fileID: 8839164220027212448}
   m_Layer: 0
   m_Name: X Leading Bar
@@ -106860,30 +106603,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8839164220027212446}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5acf0026f0dfe7b41af6885e14d3076f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minY: -0.13
-  maxY: 0.02
-  moveSpeed: 0.000008
-  z_brown: {fileID: 8839164220027212449}
---- !u!114 &8839164220027212449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8839164220027212446}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: CA29191915284A00A0207FB0213F0275
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 2
 --- !u!4 &8839164220039493093
@@ -107326,7 +107053,6 @@ GameObject:
   - component: {fileID: 8839164220496199668}
   - component: {fileID: 8839164220496199670}
   - component: {fileID: 8839164220496199669}
-  - component: {fileID: 8839164220496199672}
   - component: {fileID: 8839164220496199671}
   m_Layer: 0
   m_Name: Printer Bed
@@ -107405,30 +107131,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8839164220496199667}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea137ba4212006a4b9b4168a994549a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minY: -0.5
-  maxY: -0.335
-  moveSpeed: 0.028
-  z_yellow: {fileID: 8839164220496199672}
---- !u!114 &8839164220496199672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8839164220496199667}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: CA29191915284A00A0207FB0213F0275
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 2
 --- !u!1 &8839164220550892150
@@ -107444,7 +107154,6 @@ GameObject:
   - component: {fileID: 8839164220550892169}
   - component: {fileID: 8839164220550892168}
   - component: {fileID: 8839164220550892153}
-  - component: {fileID: 8839164220550892152}
   - component: {fileID: 8839164220550892155}
   - component: {fileID: 8839164220550892154}
   m_Layer: 0
@@ -107470,21 +107179,6 @@ Transform:
   m_Father: {fileID: 8986331944828008652}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!114 &8839164220550892152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8839164220550892150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3a0451b8517f3244bc7f377c1f1e46c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Status_text_for_Brown_Printer: {fileID: 1512098965}
-  Status_text_for_Yellow_Printer: {fileID: 1332352761}
-  octoPrintJobDisplay: {fileID: 8839164220550892153}
 --- !u!114 &8839164220550892153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107497,9 +107191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e899a43a489f50d47bd7ef0413f14b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printer1APIKey: 151B3189E551406F9C93A218FD50FD0E
-  printer2APIKey: 49C7B194E15B41738324436780C19032
-  printer1URL: http://192.168.1.101/api/job
+  printer1APIKey: 5D44B0739CB04110871B24C202512986
+  printer2APIKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
+  printer1URL: http://192.168.1.103/api/job
   printer2URL: http://192.168.1.102/api/job
   period: 5
 --- !u!114 &8839164220550892154
@@ -107515,7 +107209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   octoPrintUrl: http://192.168.1.102/
-  apiKey: 49C7B194E15B41738324436780C19032
+  apiKey: D8F7EE4BAA8C4E67A41FFA537FC91C0B
   period: 5
 --- !u!114 &8839164220550892155
 MonoBehaviour:

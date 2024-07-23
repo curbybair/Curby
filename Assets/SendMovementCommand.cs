@@ -22,7 +22,7 @@ public class SendMovementCommand : MonoBehaviour
 
     private HttpClient client;
     private string commandUrl = "http://192.168.1.102/api/printer/command";
-    private string apiKey = "49C7B194E15B41738324436780C19032";
+    private string apiKey = "D8F7EE4BAA8C4E67A41FFA537FC91C0B";
 
     private float currentX = 0f;
     private float currentY = 0f;

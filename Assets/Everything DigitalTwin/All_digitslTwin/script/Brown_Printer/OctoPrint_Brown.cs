@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class OctoPrint_Brown : MonoBehaviour
 {
-    public string octoPrintUrl = "http://192.168.1.101/";
-    public string apiKey = "151B3189E551406F9C93A218FD50FD0E";
+    public string octoPrintUrl = "http://192.168.1.103/";
+    public string apiKey = "5D44B0739CB04110871B24C202512986";
 
 
 

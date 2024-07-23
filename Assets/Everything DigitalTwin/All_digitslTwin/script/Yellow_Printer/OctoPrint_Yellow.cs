@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class OctoPrint_Yellow : MonoBehaviour
 {
     public string octoPrintUrl = "http://192.168.1.102/";
-    public string apiKey = "CA29191915284A00A0207FB0213F0275";
+    public string apiKey = "D8F7EE4BAA8C4E67A41FFA537FC91C0B";
     
 
     [System.Serializable]

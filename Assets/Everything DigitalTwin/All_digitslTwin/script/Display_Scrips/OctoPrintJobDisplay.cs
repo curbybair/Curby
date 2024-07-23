@@ -18,9 +18,9 @@ public class ProgressData
 
 public class OctoPrintJobDisplay : MonoBehaviour
 {
-    public string printer1APIKey = "151B3189E551406F9C93A218FD50FD0E";
-    public string printer2APIKey = "CA29191915284A00A0207FB0213F0275";
-    public string printer1URL = "http://192.168.1.101/api/job";
+    public string printer1APIKey = "5D44B0739CB04110871B24C202512986";
+    public string printer2APIKey = "D8F7EE4BAA8C4E67A41FFA537FC91C0B";
+    public string printer1URL = "http://192.168.1.103/api/job";
     public string printer2URL = "http://192.168.1.102/api/job";
 
     public string Printer1State { get; private set; }

@@ -9,7 +9,7 @@ public class OctoPrintCamera : MonoBehaviour
 {
     public RawImage Display_Image;                                                                              //Public Field for the raw Image
     public Button startButton;                                                                                 //Public Field for the On/off Button 
-    public string streamUrl = "http://192.168.1.101/webcam/?action=stream";                                   //Stream Url Link
+    public string streamUrl = "http://192.168.1.103/webcam/?action=stream";                                   //Stream Url Link
 
     private HttpClient client;                          //Client to capture the URL data
     private Texture2D texture;                         //Texture for displaying video fames

@@ -16,11 +16,11 @@ public class DistanceSensorHandler : MonoBehaviour
     private Vector3 targetBedPosition;
     private Vector3 targetXLeadingRodPosition;
 
-    private ZMQSubscriber zmqSubscriber;
+   // private ZMQSubscriber zmqSubscriber;
 
     void Start()
     {
-        zmqSubscriber = gameObject.AddComponent<ZMQSubscriber>();
+     //   zmqSubscriber = gameObject.AddComponent<ZMQSubscriber>();
 
         if (extruder != null)
         {
@@ -52,7 +52,7 @@ public class DistanceSensorHandler : MonoBehaviour
             Debug.LogError("xLeadingRod GameObject is not assigned!");
         }
 
-        zmqSubscriber.Initialize("tcp://192.168.1.111:5555", "Port0_Grey_Position", ProcessMessage);
+      //  zmqSubscriber.Initialize("tcp://192.168.1.111:5555", "Port0_Grey_Position", ProcessMessage);
     }
 
     void Update()
