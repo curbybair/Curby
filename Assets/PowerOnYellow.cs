@@ -8,6 +8,7 @@ public class PowerOnYellow : MonoBehaviour
 {
     public GameObject rockerSwitch;
     public GameObject lcdScreen; // Reference to the LCD screen GameObject
+    public GameObject controllerBoard;
     public Material onMaterial;
     public Material offMaterial;
     public UnityEvent onPress;
@@ -16,7 +17,7 @@ public class PowerOnYellow : MonoBehaviour
     GameObject presser;
     bool isPressed;
     bool printerOn = true;
-    string apiUrl = "http://192.168.1.102/api/printer/command"; // Replace with the correct API endpoint
+    string apiUrl = "http://192.168.1.102/api/printer/command"; 
     string apiKey = "D8F7EE4BAA8C4E67A41FFA537FC91C0B";
 
     HttpClient client;
@@ -48,13 +49,16 @@ public class PowerOnYellow : MonoBehaviour
             {
                 SendGCodeCommand("M81");
                 printerOn = false;
-                lcdScreen.SetActive(false); // Turn off the LCD screen
+                lcdScreen.SetActive(false);
+                // Turn off the LCD screen
+                controllerBoard.SetActive(false);
             }
             else
             {
                 SendGCodeCommand("M80");
                 printerOn = true;
                 lcdScreen.SetActive(true); // Turn on the LCD screen
+                controllerBoard.SetActive(true);
             }
 
             UpdateRockerState();
