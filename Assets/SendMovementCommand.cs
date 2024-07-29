@@ -21,8 +21,8 @@ public class SendMovementCommand : MonoBehaviour
     public TMP_Text confirmationText;
 
     private HttpClient client;
-    private string commandUrl = "http://192.168.1.102/api/printer/command";
-    private string apiKey = "D8F7EE4BAA8C4E67A41FFA537FC91C0B";
+    private string commandUrl = "http://192.168.1.103/api/printer/command";
+    private string apiKey = "5D44B0739CB04110871B24C202512986";
 
     private float currentX = 0f;
     private float currentY = 0f;

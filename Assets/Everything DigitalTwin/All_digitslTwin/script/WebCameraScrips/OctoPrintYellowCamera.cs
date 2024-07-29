@@ -8,7 +8,7 @@ public class OctoPrintYellowCamera : MonoBehaviour
 {
     public RawImage Display_Image;                                                                              //Public Field for the raw Image
     public Button startButton;                                                                                 //Public Field for the On/off Button 
-    public string streamUrl = "http://192.168.1.102/webcam/?action=stream";                                   //Stream Url Link 102 insead or 103
+    public string streamUrl = "http://192.168.1.105/webcam/?action=stream";                                   //Stream Url Link 102 insead or 103
 
     private HttpClient client;                          //Client to capture the URL data
     private Texture2D texture;                         //Texture for displaying video fames

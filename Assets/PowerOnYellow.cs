@@ -17,7 +17,7 @@ public class PowerOnYellow : MonoBehaviour
     GameObject presser;
     bool isPressed;
     bool printerOn = true;
-    string apiUrl = "http://192.168.1.102/api/printer/command"; 
+    string apiUrl = "http://192.168.1.105/api/printer/command"; 
     string apiKey = "D8F7EE4BAA8C4E67A41FFA537FC91C0B";
 
     HttpClient client;
