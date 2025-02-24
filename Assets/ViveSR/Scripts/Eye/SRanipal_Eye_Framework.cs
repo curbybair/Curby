@@ -43,7 +43,7 @@ namespace ViveSR
                     {
                         if (Mgr == null)
                         {
-                            Mgr = FindObjectOfType<SRanipal_Eye_Framework>();
+                            Mgr = FindFirstObjectByType<SRanipal_Eye_Framework>();
                         }
                         if (Mgr == null)
                         {

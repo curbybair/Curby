@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using TMPro;
 
 public class LCD_Yellow : MonoBehaviour
 {
    
     public TextMesh textMesh2;
+    public TMP_Text tmpTextMesh2;
 
     public OctoPrint_Yellow Temp2;
     
@@ -17,11 +19,28 @@ public class LCD_Yellow : MonoBehaviour
             float toolTemp = Temp2.ToolActualTemperature;
 
 
-            textMesh2.text = "Bed: " + bedTemp.ToString("F2") + "\n" + "Head: " + toolTemp.ToString("F2");
+            if (textMesh2 != null)
+            {
+                textMesh2.text = "Bed: " + bedTemp.ToString("F2") + "\n" + "Head: " + toolTemp.ToString("F2");
+            }
+
+            // Update TextMeshPro if assigned
+            if (tmpTextMesh2 != null)
+            {
+                tmpTextMesh2.text = "Bed: " + bedTemp.ToString("F2") + "\n" + "Head: " + toolTemp.ToString("F2");
+            }
         }
         else
         {
-            textMesh2.text = "Bed: N/A\nHead: N/A";
+            if (textMesh2 != null)
+            {
+                textMesh2.text = "Bed: N/A\nHead: N/A";
+            }
+
+            if (tmpTextMesh2 != null)
+            {
+                tmpTextMesh2.text = "Bed: N/A\nHead: N/A";
+            }
         }
     }
 }

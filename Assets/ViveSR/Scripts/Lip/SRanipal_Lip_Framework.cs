@@ -36,7 +36,7 @@ namespace ViveSR
                     {
                         if (Mgr == null)
                         {
-                            Mgr = FindObjectOfType<SRanipal_Lip_Framework>();
+                            Mgr = FindFirstObjectByType<SRanipal_Lip_Framework>();
                         }
                         if (Mgr == null)
                         {

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Right Hand
   - Left Hand
+  - Trackable
   layers:
   - Default
   - TransparentFX
@@ -17,10 +18,10 @@ TagManager:
   - 
   - Hands
   - Interactable
-  - 
-  - 
-  - 
-  - 
+  - Teleportable
+  - No Eye
+  - Background
+  - Foreground
   - 
   - 
   - 

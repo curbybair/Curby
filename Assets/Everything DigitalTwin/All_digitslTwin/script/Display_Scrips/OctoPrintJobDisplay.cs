@@ -23,6 +23,9 @@ public class OctoPrintJobDisplay : MonoBehaviour
     public string printer1URL = "http://192.168.1.103/api/job";
     public string printer2URL = "http://192.168.1.105/api/job";
 
+    public GameObject TaskBlockYellow;  
+    public GameObject TaskBlockGrey; 
+
     public string Printer1State { get; private set; }
     public string Printer2State { get; private set; }
 
@@ -50,7 +53,7 @@ public class OctoPrintJobDisplay : MonoBehaviour
         UnityWebRequest request = UnityWebRequest.Get(requestUrl);
         yield return request.SendWebRequest();
 
-        if (request.isNetworkError || request.isHttpError)
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.LogError($"Failed to fetch data from {printerName}: {request.error}");
             yield break;
@@ -83,6 +86,30 @@ public class OctoPrintJobDisplay : MonoBehaviour
          catch (Exception e)
         {
             Debug.LogError($"Failed to parse {printerName} data: {e.Message}");
+        }
+    }
+    void CheckIfPrintFinished()
+    {
+        // Enable TaskBlockGrey if Printer 1's state is "Operational" (indicating the print has finished)
+        if (Printer1State == "Operational")
+        {
+            TaskBlockGrey.SetActive(true);
+            Debug.Log("Printer 1 finished, TaskBlockGrey enabled.");
+        }
+        else
+        {
+            TaskBlockGrey.SetActive(false);
+        }
+
+        // Enable TaskBlockYellow if Printer 2's state is "Operational" (indicating the print has finished)
+        if (Printer2State == "Operational")
+        {
+            TaskBlockYellow.SetActive(true);
+            Debug.Log("Printer 2 finished, TaskBlockYellow enabled.");
+        }
+        else
+        {
+            TaskBlockYellow.SetActive(false);
         }
     }
 }

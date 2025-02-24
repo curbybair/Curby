@@ -7,12 +7,14 @@ public class Port1_Grey_EnvironmentHandler : MonoBehaviour
     public TMP_Text humidityText;
     public TMP_Text airQualityText;
 
+    public TMP_Text vibrationText;
+
     //private ZMQSubscriber zmqSubscriber;
 
     void Start()
     {
        // zmqSubscriber = gameObject.AddComponent<ZMQSubscriber>();
-        //zmqSubscriber.Initialize("tcp://192.168.1.111:5555", "Port1_Grey_Environment", ProcessMessage);
+        //zmqSubscriber.Initialize("tcp://192.168.1.111:5556", "Port1_Grey_Environment", ProcessMessage);
     }
 
     void ProcessMessage(string message)
@@ -29,7 +31,8 @@ public class Port1_Grey_EnvironmentHandler : MonoBehaviour
                 if (float.TryParse(stringArray[0], out float temperature) &&
                     float.TryParse(stringArray[1], out float pressure) &&
                     float.TryParse(stringArray[2], out float humidity) &&
-                    float.TryParse(stringArray[3], out float airQuality))
+                    float.TryParse(stringArray[3], out float airQuality) &&
+                    float.TryParse(stringArray[4], out float vibration))
                 {
                     UnityMainThreadDispatcher.Instance().Enqueue(() =>
                     {
@@ -41,6 +44,8 @@ public class Port1_Grey_EnvironmentHandler : MonoBehaviour
                             humidityText.text = $"Humidity: {humidity} %";
                         if (airQualityText != null)
                             airQualityText.text = $"Air Quality: {airQuality} ppm";
+                        if (vibrationText != null)
+                            vibrationText.text = $"Vibration: {vibration} ";
                     });
                 }
             }

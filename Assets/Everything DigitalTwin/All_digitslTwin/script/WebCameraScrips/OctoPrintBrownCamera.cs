@@ -13,6 +13,9 @@ public class OctoPrintBrownCamera : MonoBehaviour
     private HttpClient client;                          //Client to capture the URL data
     private Texture2D texture;                         //Texture for displaying video fames
 
+    private const int FrameSkip = 2; // Process every 2nd frame
+    private int frameCounter = 0;
+
     void Start()
     {
         client = new HttpClient();                                          //adds a listener to the button, so when it is clicked, the StartStream method is called.
@@ -53,8 +56,11 @@ public class OctoPrintBrownCamera : MonoBehaviour
                         memoryStream.SetLength(0);
                         memoryStream.Write(data, end + 1, data.Length - end - 1);
 
-
-                        UnityMainThreadDispatcher.Instance().Enqueue(() => UpdateTexture(jpegData));
+                        // Skip frames to optimize
+                        if (frameCounter++ % FrameSkip == 0)
+                        {
+                            UnityMainThreadDispatcher.Instance().Enqueue(() => UpdateTexture(jpegData));
+                        }
                     }
                 }
             }

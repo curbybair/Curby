@@ -5,16 +5,25 @@ public class DistanceSensorHandler : MonoBehaviour
     public GameObject extruder;
     public GameObject bed;
     public GameObject xLeadingRod;
+    public GameObject yellowExtruder;
+    public GameObject yellowBed;
+    public GameObject yellowXLeadingRod;
     public float smoothSpeed = 0.125f;
     public Vector3 bedOffset = Vector3.zero;
 
     private Vector3 initialExtruderPosition;
     private Vector3 initialBedPosition;
     private Vector3 initialXLeadingRodPosition;
+    private Vector3 initialYellowExtruderPosition;
+    private Vector3 initialYellowBedPosition;
+    private Vector3 initialYellowXLeadingRodPosition;
 
     private Vector3 targetExtruderPosition;
     private Vector3 targetBedPosition;
     private Vector3 targetXLeadingRodPosition;
+    private Vector3 targetYellowExtruderPosition;
+    private Vector3 targetYellowBedPosition;
+    private Vector3 targetYellowXLeadingRodPosition;
 
    // private ZMQSubscriber zmqSubscriber;
 
@@ -51,8 +60,37 @@ public class DistanceSensorHandler : MonoBehaviour
         {
             Debug.LogError("xLeadingRod GameObject is not assigned!");
         }
+        if (yellowExtruder != null)
+        {
+            initialYellowExtruderPosition = yellowExtruder.transform.position;
+            targetYellowExtruderPosition = initialYellowExtruderPosition;
+        }
+        else
+        {
+            Debug.LogError("Yellow extruder GameObject is not assigned!");
+        }
 
-      //  zmqSubscriber.Initialize("tcp://192.168.1.111:5555", "Port0_Grey_Position", ProcessMessage);
+        if (yellowBed != null)
+        {
+            initialYellowBedPosition = yellowBed.transform.position + bedOffset;
+            targetYellowBedPosition = initialYellowBedPosition;
+        }
+        else
+        {
+            Debug.LogError("Yellow bed GameObject is not assigned!");
+        }
+
+        if (yellowXLeadingRod != null)
+        {
+            initialYellowXLeadingRodPosition = yellowXLeadingRod.transform.position;
+            targetYellowXLeadingRodPosition = initialYellowXLeadingRodPosition;
+        }
+        else
+        {
+            Debug.LogError("Yellow xLeadingRod GameObject is not assigned!");
+        }
+
+      //  zmqSubscriber.Initialize("tcp://192.168.1.111:5556", "Port0_Grey_Position", ProcessMessage);
     }
 
     void Update()
@@ -65,6 +103,15 @@ public class DistanceSensorHandler : MonoBehaviour
 
         if (xLeadingRod != null)
             xLeadingRod.transform.position = Vector3.Lerp(xLeadingRod.transform.position, targetXLeadingRodPosition, smoothSpeed * Time.deltaTime);
+
+        if (yellowExtruder != null)
+            yellowExtruder.transform.position = Vector3.Lerp(yellowExtruder.transform.position, targetYellowExtruderPosition, smoothSpeed * Time.deltaTime);
+
+        if (yellowBed != null)
+            yellowBed.transform.position = Vector3.Lerp(yellowBed.transform.position, targetYellowBedPosition, smoothSpeed * Time.deltaTime);
+
+        if (yellowXLeadingRod != null)
+            yellowXLeadingRod.transform.position = Vector3.Lerp(yellowXLeadingRod.transform.position, targetYellowXLeadingRodPosition, smoothSpeed * Time.deltaTime);
     }
 
     void ProcessMessage(string message)
@@ -90,6 +137,10 @@ public class DistanceSensorHandler : MonoBehaviour
                     Vector3 newBedPosition = initialBedPosition + new Vector3(0, 0, zPositionMeters);
                     Vector3 newXLeadingRodPosition = initialXLeadingRodPosition + new Vector3(0, -yPositionMeters, 0);
 
+                    Vector3 newYellowExtruderPosition = initialYellowExtruderPosition + new Vector3(-xPositionMeters, -yPositionMeters, 0);
+                    Vector3 newYellowBedPosition = initialYellowBedPosition + new Vector3(0, 0, zPositionMeters);
+                    Vector3 newYellowXLeadingRodPosition = initialYellowXLeadingRodPosition + new Vector3(0, -yPositionMeters, 0);
+
                     UnityMainThreadDispatcher.Instance().Enqueue(() =>
                     {
                         if (extruder != null)
@@ -100,6 +151,15 @@ public class DistanceSensorHandler : MonoBehaviour
 
                         if (xLeadingRod != null)
                             targetXLeadingRodPosition = newXLeadingRodPosition;
+                            
+                         if (yellowExtruder != null)
+                            targetYellowExtruderPosition = newYellowExtruderPosition;
+
+                        if (yellowBed != null)
+                            targetYellowBedPosition = newYellowBedPosition;
+
+                        if (yellowXLeadingRod != null)
+                            targetYellowXLeadingRodPosition = newYellowXLeadingRodPosition;
                     });
                 }
             }

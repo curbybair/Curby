@@ -28,9 +28,13 @@ using System;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Threading;
+using System.Collections;
 // Unity 
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+
+
+
 
 
 public class ur_data_processing : MonoBehaviour
@@ -79,9 +83,15 @@ public class ur_data_processing : MonoBehaviour
     // Class Stream / Control {Universal Robots TCP/IP}
     private UR_Stream ur_stream_robot;
     private UR_Control ur_ctrl_robot;
+    //Dashboard control for both robots
+    private UR_Control_Dashboard ur_dashboard_robot_1;
+    private UR_Control_Dashboard ur_dashboard_robot_2;
     // Other variables
     private int main_ur3_state = 0;
     private int aux_counter_pressed_btn = 0;
+
+    public UR_Control_Dashboard URDashboardRobot1 => ur_dashboard_robot_1;
+    public UR_Control_Dashboard URDashboardRobot2 => ur_dashboard_robot_2;
 
     // Start is called before the first frame update
     void Start()
@@ -90,16 +100,29 @@ public class ur_data_processing : MonoBehaviour
         //  Read Data:
         UR_Stream_Data.ip_address = "192.168.1.112";
         //  Communication speed: CB-Series 125 Hz (8 ms), E-Series 500 Hz (2 ms)
-        UR_Stream_Data.time_step = 8;
+        UR_Stream_Data.time_step = 2;
         //  Write Data:
         UR_Control_Data.ip_address = "192.168.1.112";
         //  Communication speed: CB-Series 125 Hz (8 ms), E-Series 500 Hz (2 ms)
-        UR_Control_Data.time_step = 8;
+        UR_Control_Data.time_step = 2;
+        
 
-        // Initialization Stream {Universal Robots TCP/IP}
+        // Initialization Stream {Universal Robots TCP/IP}/
         ur_stream_robot = new UR_Stream();
         // Start Control {Universal Robots TCP/IP}
         ur_ctrl_robot = new UR_Control();
+
+        // Dashboard control for Robot 1
+        ur_dashboard_robot_1 = gameObject.AddComponent<UR_Control_Dashboard>();
+        UR_Control_Data.ip_address = "192.168.1.112"; // IP for Robot 1
+        ur_dashboard_robot_1.programName = "test"; // Example program
+        //ur_dashboard_robot_1.Start(); // Start Robot 1
+
+        // Dashboard ycontrol for Robot 2
+        ur_dashboard_robot_2 = gameObject.AddComponent<UR_Control_Dashboard>();
+        UR_Control_Data.ip_address = "192.168.1.120"; // IP for Robot 2
+        ur_dashboard_robot_2.programName = "robottestnew"; // Example program
+        //ur_dashboard_robot_2.Start(); // Start Robot 2
     }
 
     // Update is called once per frame
@@ -178,16 +201,33 @@ public class ur_data_processing : MonoBehaviour
     {
         try
         {
-            // Destroy Stream {Universal Robots TCP/IP}
-            ur_stream_robot.Destroy();
-            // Destroy Control {Universal Robots TCP/IP}
-            ur_ctrl_robot.Destroy();
+            // Check if objects are not null before calling Destroy
+            if (ur_stream_robot != null)
+            {
+                ur_stream_robot.Destroy();
+            }
 
+            if (ur_ctrl_robot != null)
+            {
+                ur_ctrl_robot.Destroy();
+            }
+
+            if (ur_dashboard_robot_1 != null)
+            {
+                ur_dashboard_robot_1.Destroy();
+            }
+
+            if (ur_dashboard_robot_2 != null)
+            {
+                ur_dashboard_robot_2.Destroy();
+            }
+
+            // Finally, destroy the current MonoBehaviour (this script)
             Destroy(this);
         }
         catch (Exception e)
         {
-           Debug.LogException(e);
+            Debug.LogException(e);
         }
     }
 
@@ -211,6 +251,8 @@ public class ur_data_processing : MonoBehaviour
 
         // Total message length in bytes
         private const UInt32 total_msg_length = 3288596480;
+
+        
 
         public void UR_Stream_Thread()
         {
@@ -321,6 +363,33 @@ public class ur_data_processing : MonoBehaviour
         private TcpClient tcp_client = new TcpClient();
         private NetworkStream network_stream = null;
 
+        public void SendURScriptCommand(string command)
+        {
+            try
+            {
+                if (!tcp_client.Connected)
+                {
+                    tcp_client.Connect(UR_Control_Data.ip_address, UR_Control_Data.port_number);
+                }
+
+                if (network_stream == null)
+                {
+                    network_stream = tcp_client.GetStream();
+                }
+
+                // Send the URScript command as a string
+                byte[] commandBytes = System.Text.Encoding.ASCII.GetBytes(command + "\n");
+                network_stream.Write(commandBytes, 0, commandBytes.Length);
+            }
+            catch (SocketException e)
+            {
+                Debug.LogError($"Socket exception while sending URScript command: {e.Message}");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Unexpected error while sending URScript command: {e.Message}");
+            }
+        }
         public void UR_Control_Thread()
         {
             try
@@ -331,6 +400,7 @@ public class ur_data_processing : MonoBehaviour
                     tcp_client.Connect(UR_Control_Data.ip_address, UR_Control_Data.port_number);
 
                 }
+                
 
                 // Initialization TCP/IP Communication (Stream)
                 network_stream = tcp_client.GetStream();
@@ -373,9 +443,11 @@ public class ur_data_processing : MonoBehaviour
 
         public void Start()
         {
-            // Start thread
+            // Start thread/
             exit_thread = false;
             // Start a thread and listen to incoming messages
+            string timeoutCommand = "socket_read_line(device, timeout=-1)";
+            SendURScriptCommand(timeoutCommand);
             robot_thread = new Thread(new ThreadStart(UR_Control_Thread));
             robot_thread.IsBackground = true;
             robot_thread.Start();
@@ -400,5 +472,109 @@ public class ur_data_processing : MonoBehaviour
             }
             Thread.Sleep(100);
         }
+    }
+}
+
+
+public class UR_Control_Dashboard : MonoBehaviour
+{
+    // TCP/IP Communication for Dashboard Server
+    private TcpClient dashboard_client = new TcpClient();
+    private NetworkStream dashboard_stream = null;
+
+    private bool exit_thread = false;
+    public string programName;
+
+    
+
+    // Method to send a command to the Dashboard Server
+    public void SendDashboardCommand(string command)
+    {
+        try
+        {
+            if (dashboard_client.Connected == false)
+            {
+                // Connect to the robot's Dashboard Server on port 29999
+                dashboard_client.Connect(ur_data_processing.UR_Control_Data.ip_address, 29999);
+            }
+
+            // Send the command
+            dashboard_stream = dashboard_client.GetStream();
+            byte[] command_bytes = System.Text.Encoding.ASCII.GetBytes(command + "\n");
+            dashboard_stream.Write(command_bytes, 0, command_bytes.Length);
+
+            // Read the response (optional, can be omitted if you don't need the response)
+            byte[] response = new byte[256];
+            dashboard_stream.Read(response, 0, response.Length);
+            string response_str = System.Text.Encoding.ASCII.GetString(response);
+            Debug.Log("Dashboard Response: " + response_str);
+        }
+        catch (SocketException e)
+        {
+            Debug.LogException(e);
+        }
+    }
+
+    // Method to load and run a program
+    public void RunProgram(string programName)
+    {
+        // Load the program
+        SendDashboardCommand("load " + programName + ".urp");
+        //Debug.LogWarning("Loaded Program");
+        // Start the program
+        SendDashboardCommand("robotmode");
+        StartCoroutine(PlayProgramAfterDelay());
+    }
+    public void CheckRobotStatus()
+    {
+        SendDashboardCommand("robotmode");
+        // You should get a response from the robot that indicates if it's ready
+        // Adjust the logic sbased on the response to ensure it's ready to run the next program
+    }
+
+    private IEnumerator PlayProgramAfterDelay()
+    {
+        yield return new WaitForSeconds(1);
+        SendDashboardCommand("robotmode"); // Adjust delay if necessary
+        SendDashboardCommand("play");
+        SendDashboardCommand("robotmode");
+        
+    }
+
+    public void OnRunRobot1()
+    {
+        //SendDashboardCommand("set operational mode manual");
+        SendDashboardCommand("stop");
+        SendDashboardCommand("robotmode");
+        RunProgram("test");
+    }
+
+    public void OnRunRobot2()
+    {
+        //SendDashboardCommand("set operational mode automatic");
+        SendDashboardCommand("stop");
+        SendDashboardCommand("robotmode");
+        RunProgram("robottestnew");
+    }
+
+
+    public void Start()
+    {
+        // Start thread or any other control logic
+        exit_thread = false;
+
+        // Example to run a program from Unity
+        //RunProgram("robotblocktestnew");
+    }
+
+    public void Destroy()
+    {
+        if (dashboard_client.Connected == true)
+        {
+            // Disconnect communication
+            dashboard_stream.Dispose();
+            dashboard_client.Close();
+        }
+        Thread.Sleep(100);
     }
 }

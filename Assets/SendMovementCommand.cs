@@ -36,17 +36,17 @@ public class SendMovementCommand : MonoBehaviour
         client = new HttpClient();
         client.DefaultRequestHeaders.Add("X-Api-Key", apiKey);
 
-        buttonPosX.onClick.AddListener(() => MoveAxis("G0 X10", "X", 10));
-        buttonNegX.onClick.AddListener(() => MoveAxis("G0 X-10", "X", -10));
-        buttonPosY.onClick.AddListener(() => MoveAxis("G0 Y10", "Y", 10));
-        buttonNegY.onClick.AddListener(() => MoveAxis("G0 Y-10", "Y", -10));
-        buttonPosZ.onClick.AddListener(() => MoveAxis("G0 Z10", "Z", 10));
-        buttonNegZ.onClick.AddListener(() => MoveAxis("G0 Z-10", "Z", -10));
+        buttonPosX.onClick.AddListener(() => MoveAxis("G0 X10", "X", 10, true));
+        buttonNegX.onClick.AddListener(() => MoveAxis("G0 X-10", "X", -10, true));
+        buttonPosY.onClick.AddListener(() => MoveAxis("G0 Y10", "Y", 10, true));
+        buttonNegY.onClick.AddListener(() => MoveAxis("G0 Y-10", "Y", -10, true));
+        buttonPosZ.onClick.AddListener(() => MoveAxis("G0 Z10", "Z", 10, true));
+        buttonNegZ.onClick.AddListener(() => MoveAxis("G0 Z-10", "Z", -10, true));
         homeButton.onClick.AddListener(HomeAllAxes);
         cancelButton.onClick.AddListener(CancelOrConfirm);
     }
 
-    async void MoveAxis(string gCodeCommand, string axis, float moveAmount)
+    async void MoveAxis(string gCodeCommand, string axis, float moveAmount, bool isRelative)
     {
         Debug.Log($"Attempting to send command: {gCodeCommand}");
         Debug.Log($"Axis: {axis}, Move Amount: {moveAmount}");
@@ -58,6 +58,10 @@ public class SendMovementCommand : MonoBehaviour
         }
 
         canSendCommand = false;
+
+        // Check if we should be in relative mode (G91) or absolute mode (G90)
+        string modeCommand = isRelative ? "G91" : "G90";
+        await SendCommand(modeCommand);  // Set mode (relative or absolute)
 
         var commandPayload = new CommandPayload { command = gCodeCommand };
         string jsonPayload = JsonUtility.ToJson(commandPayload);
@@ -235,7 +239,32 @@ public class SendMovementCommand : MonoBehaviour
             client.Dispose();
         }
     }
+    async Task SendCommand(string command)
+    {
+        var commandPayload = new CommandPayload { command = command };
+        string jsonPayload = JsonUtility.ToJson(commandPayload);
+
+        HttpContent content = new StringContent(jsonPayload, System.Text.Encoding.UTF8, "application/json");
+        HttpResponseMessage response = null;
+
+        try
+        {
+            response = await client.PostAsync(commandUrl, content);
+            if (!response.IsSuccessStatusCode)
+            {
+                string errorContent = await response.Content.ReadAsStringAsync();
+                Debug.LogError($"Failed to send command {command}. Response: {response.StatusCode}, {errorContent}");
+            }
+        }
+        catch (HttpRequestException e)
+        {
+            Debug.LogError($"Request error: {e.Message}");
+        }
+
+    }
+
 }
+
 
 [System.Serializable]
 public class CommandPayload

@@ -23,7 +23,7 @@ public class Position_Head_Bed : MonoBehaviour
         Debug.Log("Command sent successfully 1.");
         yield return request.SendWebRequest();
 
-        if (request.isNetworkError || request.isHttpError)
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.LogError("Failed to send the command: " + request.error);
         }

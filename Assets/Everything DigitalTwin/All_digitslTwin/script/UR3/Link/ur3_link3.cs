@@ -35,7 +35,7 @@ public class ur3_link3 : MonoBehaviour
     {
         try
         {
-            transform.localEulerAngles = new Vector3(0.0f, 0.0f, (float)(ur_data_processing.UR_Stream_Data.J_Orientation[2] * (180.0 / Math.PI)));
+            transform.localEulerAngles = new Vector3(0.0f, 0.0f, (float)(RobotPlaybackManager.Instance.CurrentJointAngles[2] * (180.0 / Math.PI)));
         }
         catch (Exception e)
         {

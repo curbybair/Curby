@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading;
 
 public class MotionCameraStream : MonoBehaviour
 {
@@ -14,15 +15,18 @@ public class MotionCameraStream : MonoBehaviour
     private HttpClient client;
     private Texture2D texture;
     private Queue<byte[]> frameQueue = new Queue<byte[]>();
+    private CancellationTokenSource cancellationTokenSource;
     private bool isStreaming = false;
-    private const int BufferSize = 16384;  // Adjust buffer size as needed
-    private const int MaxQueueSize = 1;  // Limit the queue size to reduce latency
+    private const int BufferSize = 16384;
+    private const int MaxQueueSize = 1;
+    private int frameSkip = 2;  // Process every 2nd frame
+    private int frameCounter = 0;
 
     void Start()
     {
         client = new HttpClient();
         startButton.onClick.AddListener(StartStream);
-        texture = new Texture2D(1280, 720, TextureFormat.RGB24, false);  // Set texture size based on expected stream resolution
+        texture = new Texture2D(640, 480, TextureFormat.RGB24, false);
         displayImage.texture = texture;
     }
 
@@ -31,50 +35,66 @@ public class MotionCameraStream : MonoBehaviour
         if (!isStreaming)
         {
             isStreaming = true;
-            await Task.Run(() => FetchMJPEGStream());
+            cancellationTokenSource = new CancellationTokenSource();
+            await Task.Run(() => FetchMJPEGStream(cancellationTokenSource.Token));
         }
     }
 
-    async Task FetchMJPEGStream()
+    async Task FetchMJPEGStream(CancellationToken cancellationToken)
     {
         try
         {
-            var response = await client.GetStreamAsync(streamUrl);
-            var memoryStream = new MemoryStream();
-
-            while (isStreaming)
+            using (var response = await client.GetStreamAsync(streamUrl))
+            using (var memoryStream = new MemoryStream())
             {
                 byte[] buffer = new byte[BufferSize];
                 int bytesRead;
 
-                while ((bytesRead = await response.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                while (isStreaming && !cancellationToken.IsCancellationRequested)
                 {
-                    memoryStream.Write(buffer, 0, bytesRead);
-                    byte[] data = memoryStream.ToArray();
-                    int start = FindJPEGHeader(data);
-                    int end = FindJPEGFooter(data, start);
+                    bytesRead = await response.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
 
-                    if (start >= 0 && end >= 0)
+                    if (bytesRead > 0)
                     {
-                        byte[] jpegData = new byte[end - start + 1];
-                        System.Array.Copy(data, start, jpegData, 0, jpegData.Length);
-                        memoryStream.SetLength(0);
-                        memoryStream.Write(data, end + 1, data.Length - end - 1);
+                        memoryStream.Write(buffer, 0, bytesRead);
+                        byte[] data = memoryStream.ToArray();
+                        int start = FindJPEGHeader(data);
+                        int end = FindJPEGFooter(data, start);
 
-                        lock (frameQueue)
+                        if (start >= 0 && end >= 0)
                         {
-                            if (frameQueue.Count < MaxQueueSize)
+                            byte[] jpegData = new byte[end - start + 1];
+                            System.Array.Copy(data, start, jpegData, 0, jpegData.Length);
+                            memoryStream.SetLength(0);
+                            memoryStream.Write(data, end + 1, data.Length - end - 1);
+
+                            lock (frameQueue)
                             {
-                                frameQueue.Enqueue(jpegData);
+                                if (frameQueue.Count < MaxQueueSize)
+                                {
+                                    frameQueue.Enqueue(jpegData);
+                                }
                             }
                         }
                     }
                 }
             }
         }
+        catch (TaskCanceledException)
+        {
+            Debug.Log("Stream fetching canceled.");
+        }
         catch (HttpRequestException e)
         {
             Debug.LogError("Request error: " + e.Message);
+        }
+        catch (IOException e)
+        {
+            Debug.LogError("Stream read error: " + e.Message);
+        }
+        finally
+        {
+            isStreaming = false;
         }
     }
 
@@ -87,7 +107,10 @@ public class MotionCameraStream : MonoBehaviour
             {
                 jpegData = frameQueue.Dequeue();
             }
-            UpdateTexture(jpegData);
+            if (frameCounter++ % frameSkip == 0)
+            {
+                UpdateTexture(jpegData);
+            }
         }
     }
 
@@ -123,10 +146,20 @@ public class MotionCameraStream : MonoBehaviour
 
     void OnDestroy()
     {
-        isStreaming = false;
+        StopStream();
         if (client != null)
         {
             client.Dispose();
+        }
+    }
+
+    public void StopStream()
+    {
+        if (isStreaming)
+        {
+            isStreaming = false;
+            cancellationTokenSource?.Cancel();
+            cancellationTokenSource?.Dispose();
         }
     }
 }

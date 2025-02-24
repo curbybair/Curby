@@ -3,8 +3,6 @@
 *.csproj
 *.csproj
 *.csproj
-*.meta
-*.meta
 /[Ll]Library/ArtifactDB/
 /[Ll]ibrary/
 .vs/DigitalTwin_Unity/v16/.suo
